@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class HotelImage {
 	@Id
@@ -12,6 +14,7 @@ public class HotelImage {
 	private int id;
 	
 	@ManyToOne
+	@JsonIgnore
 	private Hotel hotel;
 	
 	private String url;

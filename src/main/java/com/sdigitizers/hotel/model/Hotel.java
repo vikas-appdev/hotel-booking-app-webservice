@@ -26,29 +26,15 @@ public class Hotel {
 	private String locality;
 	@Column(columnDefinition="text")
 	private String terms;
-
-	public String getLocality() {
-		return locality;
-	}
-
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
-
-	public String getImageLink() {
-		return imageLink;
-	}
-
-	public void setImageLink(String imageLink) {
-		this.imageLink = imageLink;
-	}
-
 	@Embedded
 	private Address address;
 	private String description;
-
 	@OneToMany(mappedBy = "hotel")
 	private List<Room> rooms;
+	@OneToMany(mappedBy="hotel")
+	private List<HotelImage> images;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -140,6 +126,38 @@ public class Hotel {
 
 	public String getIdString() {
 		return String.format("%04d", id);
+	}
+	
+	public String getTerms() {
+		return terms;
+	}
+
+	public void setTerms(String terms) {
+		this.terms = terms;
+	}
+
+	public String getLocality() {
+		return locality;
+	}
+
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
+
+	public String getImageLink() {
+		return imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
+
+	public List<HotelImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<HotelImage> images) {
+		this.images = images;
 	}
 
 }
