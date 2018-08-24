@@ -28,6 +28,9 @@ public class Room {
 	private Hotel hotel;
 	
 	@OneToMany(mappedBy="room")
+	private List<RoomImage> images;
+	
+	@OneToMany(mappedBy="room")
 	@JsonIgnore
 	private List<Booking> bookings;
 	
