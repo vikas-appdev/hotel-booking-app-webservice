@@ -30,6 +30,14 @@ public class Room {
 	@OneToMany(mappedBy="room")
 	private List<RoomImage> images;
 	
+	public List<RoomImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<RoomImage> images) {
+		this.images = images;
+	}
+
 	@OneToMany(mappedBy="room")
 	@JsonIgnore
 	private List<Booking> bookings;
