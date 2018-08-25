@@ -68,9 +68,6 @@ public class Room {
 		this.bookings = bookings;
 	}
 
-	public boolean isDiscountInPercentage() {
-		return discountInPercentage;
-	}
 
 	public void setDiscountInPercentage(boolean discountInPercentage) {
 		this.discountInPercentage = discountInPercentage;
@@ -139,8 +136,8 @@ public class Room {
 	public void setDiscountValue(double discountValue) {
 		this.discountValue = discountValue;
 	}
-
-	public boolean isDicountInPercentage() {
+	
+	public boolean isDiscountInPercentage() {
 		return discountInPercentage;
 	}
 
