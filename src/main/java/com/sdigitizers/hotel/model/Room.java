@@ -214,5 +214,21 @@ public class Room {
 	
 	////
 	
+    public String getDiscountPrint() {
+    	return discountInPercentage? discountValue+" %" : discountValue+"";
+    }
+    
+    public double getDiscountAmount() {
+    	return discountInPercentage? (price * (discountValue/100)) : discountValue;
+    }
+    
+    public double getDiscountPercentage() {
+    	return discountInPercentage? discountValue : (discountValue/price)*100;
+    }
+    
+    public double getDiscountedPrice() {
+    	return price - getDiscountAmount();
+    }
+    
 
 }

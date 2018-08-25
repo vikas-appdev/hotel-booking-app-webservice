@@ -31,6 +31,8 @@ public class Booking {
 	private LocalDateTime uptoTime;
 	private String bookedFor;
 	private String countryCode;
+	private double price;
+	private double discountAmount;
 	private long phone;
 	private String email;
 	
@@ -156,5 +158,27 @@ public class Booking {
 		this.status = status;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+	
+	public BookingReview getBookingReview() {
+		return bookingReview;
+	}
 
+	public void setBookingReview(BookingReview bookingReview) {
+		this.bookingReview = bookingReview;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setDiscountAmount(double discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public double getDiscountedPrice() {
+		return price - discountAmount;
+	}
 }

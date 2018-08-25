@@ -1,5 +1,5 @@
-insert into hotel(terms,locality, image_link, id, city, country, location_coordinates, pincode, state, street, contact_person, country_code, description, email, name, password, phone1, phone2)
-values('Kuchh terms and conditions ','Khanapara', 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg', 10001, 'Jorhat', 'India', '19,19', 785001, 'Assam', 'Fancy Ali', 'Malik Hotel Ka', '+91', 'Description wala column hai', 'vikas.appdev@gmail.com', 'Lakshmi Hotel', 'qwerty', 8723992495, 7002132366);
+insert into hotel(rating,terms,locality, image_link, id, city, country, location_coordinates, pincode, state, street, contact_person, country_code, description, email, name, password, phone1, phone2)
+values(1,'Kuchh terms and conditions ','Khanapara', 'https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg', 10001, 'Jorhat', 'India', '19,19', 785001, 'Assam', 'Fancy Ali', 'Malik Hotel Ka', '+91', 'Description wala column hai', 'vikas.appdev@gmail.com', 'Lakshmi Hotel', 'qwerty', 8723992495, 7002132366);
 insert into room(id, ac, active, category, clean_toilet, couple_allowed, discount_in_percentage, discount_value, family_allowed, name, no_of_persons, price, service24_7, tv, wifi, hotel_id)
 values(11001, 1, 1, 1, 1, 1, 1, 10, 1, 'test', 1, 500, 1, 1, 1, 10001);
 insert into room(id, ac, active, category, clean_toilet, couple_allowed, discount_in_percentage, discount_value, family_allowed, name, no_of_persons, price, service24_7, tv, wifi, hotel_id)
@@ -42,5 +42,5 @@ insert into room_image(id, url, room_id) values(50020, 'https://www.flightexpert
 
 insert into user(id, name, active, pincode, phone) values (80001, 'user', 1, 785001, 7850012545);
 
-insert into booking(id, booked_for, country_code, email, phone, special_note, status, room_id, user_id)  values(20001, 'friend', '+91', 'test@test.com',  '9658758698', 'special note', 1,  11001, 80001);
+insert into booking(price,discount_amount,id, booked_for, country_code, email, phone, special_note, status, room_id, user_id)  values(500,0,20001, 'friend', '+91', 'test@test.com',  '9658758698', 'special note', 1,  11001, 80001);
 

@@ -15,7 +15,6 @@ public class Invoice {
 	private Booking booking;
 	private LocalDate date;
 	private double price;
-	private double qty;
 	private double discountAmount;
 	private double gstRate;
 	private int sac;
@@ -49,12 +48,6 @@ public class Invoice {
 	}
 	public void setPrice(double price) {
 		this.price = price;
-	}
-	public double getQty() {
-		return qty;
-	}
-	public void setQty(double qty) {
-		this.qty = qty;
 	}
 	public double getDiscountAmount() {
 		return discountAmount;
@@ -121,5 +114,17 @@ public class Invoice {
 		this.gstin = gstin;
 	}
 	
+	
+	public double getDiscountedPrice() {
+		return price - discountAmount;
+	}
+	
+	public double getTaxAmount() {
+		return getDiscountedPrice() * (gstRate/100);
+	}
+	
+	public double getNetPayableAmount() {
+		return getDiscountedPrice() + getTaxAmount();
+	}
 	
 }
