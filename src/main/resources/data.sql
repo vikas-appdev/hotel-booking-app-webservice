@@ -3,7 +3,7 @@ values('Kuchh terms and conditions ','Khanapara', 'https://images.pexels.com/pho
 insert into room(id, ac, active, category, clean_toilet, couple_allowed, discount_in_percentage, discount_value, family_allowed, name, no_of_persons, price, service24_7, tv, wifi, hotel_id)
 values(11001, 1, 1, 1, 1, 1, 1, 10, 1, 'test', 1, 500, 1, 1, 1, 10001);
 insert into room(id, ac, active, category, clean_toilet, couple_allowed, discount_in_percentage, discount_value, family_allowed, name, no_of_persons, price, service24_7, tv, wifi, hotel_id)
-values(11002, 1, 1, 1, 1, 1, 1, 10, 1, 'test', 1, 500, 1, 1, 1, 10001);
+values(11002, 1, 1, 1, 1, 1, 0, 100, 1, 'test', 1, 500, 1, 1, 1, 10001);
 
 insert into hotel_image(id, url, hotel_id) values(5001, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 10001);
 insert into hotel_image(id, url, hotel_id) values(5002, 'https://media-cdn.tripadvisor.com/media/photo-s/0e/b9/8a/3e/gomang-boutique-hotel.jpg', 10001);
@@ -39,3 +39,8 @@ insert into room_image(id, url, room_id) values(50017, 'https://media-cdn.tripad
 insert into room_image(id, url, room_id) values(50018, 'http://www.qygjxz.com/data/out/111/4134769-hotel-images.jpg', 11002);
 insert into room_image(id, url, room_id) values(50019, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
 insert into room_image(id, url, room_id) values(50020, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
+
+insert into user(id, name, active, pincode, phone) values (80001, 'user', 1, 785001, 7850012545);
+
+insert into booking(id, booked_for, country_code, email, phone, special_note, status, room_id, user_id)  values(20001, 'friend', '+91', 'test@test.com',  '9658758698', 'special note', 1,  11001, 80001);
+

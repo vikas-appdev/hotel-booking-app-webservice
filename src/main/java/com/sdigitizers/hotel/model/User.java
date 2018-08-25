@@ -122,5 +122,11 @@ public class User {
 	public void setAccountCreationTime(LocalDateTime accountCreationTime) {
 		this.accountCreationTime = accountCreationTime;
 	}
+	
+	/////
+	
+	public int getAge() {
+		return LocalDate.now().getYear()-getDateOfBirth().getYear();
+	}
 
 }

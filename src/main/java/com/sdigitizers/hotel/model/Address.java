@@ -65,5 +65,23 @@ public class Address {
 		this.locationCoordinates = locationCoordinates;
 		return this;
 	}
+	
+	@Override
+	public String toString() {
+		return street+", "+city+", "+state+", ["+pincode+"], "+country;
+	}
 
+	public double getLatitude() {
+		if(null != locationCoordinates && locationCoordinates.contains(",")) {
+			return Double.parseDouble(locationCoordinates.split(",")[0]);
+		}
+		return 0;
+	}
+	public double getLongitude() {
+		if(null != locationCoordinates && locationCoordinates.contains(",")) {
+			return Double.parseDouble(locationCoordinates.split(",")[1]);
+		}
+		return 0;
+	}
+	
 }

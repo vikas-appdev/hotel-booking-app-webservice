@@ -26,6 +26,7 @@ public class Hotel {
 	private String locality;
 	@Column(columnDefinition="text")
 	private String terms;
+	private double rating;
 	@Embedded
 	private Address address;
 	private String description;

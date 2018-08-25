@@ -211,5 +211,8 @@ public class Room {
 	public void setService24_7(boolean service24_7) {
 		this.service24_7 = service24_7;
 	}
+	
+	////
+	
 
 }
