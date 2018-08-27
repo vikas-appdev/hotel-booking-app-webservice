@@ -19,6 +19,8 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 	private boolean active;
+	private String password;
+	
 	private String imageLink;
 	private String name;
 	private String countryCode;
@@ -118,6 +120,16 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	public LocalDateTime getAccountCreationTime() {
 		return accountCreationTime;
