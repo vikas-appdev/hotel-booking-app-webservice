@@ -20,7 +20,7 @@ public class User {
 	private Integer id;
 	private boolean active;
 	private String password;
-	
+	private String gender;
 	private String imageLink;
 	private String name;
 	private String countryCode;
@@ -143,6 +143,14 @@ public class User {
 	
 	public int getAge() {
 		return LocalDate.now().getYear()-getDateOfBirth().getYear();
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	
