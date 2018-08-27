@@ -132,5 +132,7 @@ public class User {
 	public int getAge() {
 		return LocalDate.now().getYear()-getDateOfBirth().getYear();
 	}
+	
+	
 
 }
