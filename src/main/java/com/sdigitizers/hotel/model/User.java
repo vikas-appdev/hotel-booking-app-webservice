@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -27,8 +29,15 @@ public class User {
 	private Address address;
 	
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List<Booking> bookings;
 	
+	private LocalDateTime accountCreationTime;
+	
+	public Integer getId() {
+		return id;
+	}
+
 	public List<Booking> getBookings() {
 		return bookings;
 	}
@@ -41,15 +50,10 @@ public class User {
 		this.id = id;
 	}
 
-	private LocalDateTime accountCreationTime;
+	
+	
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public boolean isActive() {
 		return active;

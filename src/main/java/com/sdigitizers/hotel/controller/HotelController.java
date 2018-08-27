@@ -12,17 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.model.Hotel;
+import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.HotelRepository;
+import com.sdigitizers.hotel.repository.UserRepository;
 
 @RestController
 public class HotelController {
 
 	@Autowired
 	private HotelRepository hotelRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@GetMapping("hotels")
 	public List<Hotel> retriveAllHotels() {
 		return hotelRepository.findAll();
+	}
+	
+	@GetMapping("usse")
+	public List<User> retriveAllUsers() {
+		return userRepository.findAll();
 	}
 	
 	@PostMapping("hotels")
