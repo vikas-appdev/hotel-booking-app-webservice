@@ -28,9 +28,17 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
+	
 	@GetMapping("/users/{id}")
-	public User retriveUser(@PathVariable String id) {
-		return userRepository.findByEmail(id);
+	public Optional<User> retriveUserByEmail(@PathVariable String id) {
+		Optional<User> user = userRepository.findByEmail(id);
+		if(!user.isPresent())
+			throw new UserNotFoundException("id- "+id);
+		
+		
+		
+		return user;
 		
 	}
 	

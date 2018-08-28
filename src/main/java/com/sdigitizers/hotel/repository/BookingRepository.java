@@ -1,7 +1,5 @@
 package com.sdigitizers.hotel.repository;
 
-import java.time.LocalDate;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sdigitizers.hotel.model.Booking;

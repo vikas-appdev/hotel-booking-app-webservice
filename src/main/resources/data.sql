@@ -40,7 +40,8 @@ insert into room_image(id, url, room_id) values(50018, 'http://www.qygjxz.com/da
 insert into room_image(id, url, room_id) values(50019, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
 insert into room_image(id, url, room_id) values(50020, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
 
-insert into user(id,account_creation_time, active, city, country, location_coordinates, pincode, state, street, country_code, date_of_birth, email, image_link, name, phone) values(80001,'2018-05-12 23:11:12', true, 'Guwahati', 'India', '858,858', 781005, 'Assam', 'ss', '91', '1994-07-31', 'ram@gmail.com', 'dd', 'Ram','7399780500');
+insert into user(gender, password, id,account_creation_time, active, city, country, location_coordinates, pincode, state, street, country_code, date_of_birth, email, image_link, name, phone) 
+values('male', 'qwerty', 80001,'2018-05-12 23:11:12', true, 'Guwahati', 'India', '858,858', 781005, 'Assam', 'ss', '91', '1994-07-31', 'manishmundra001@gmail.com', 'dd', 'Ram','7399780500');
 
 insert into booking(price,discount_amount,id, booked_for, country_code, email, phone, special_note, status, room_id, user_id)  values(500,0,20001, 'friend', '+91', 'test@test.com',  '9658758698', 'special note', 1,  11001, 80001);
 
