@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -26,6 +27,7 @@ public class User {
 	private String countryCode;
 	private long phone;
 	private String email;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	@Embedded
 	private Address address;
@@ -33,7 +35,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<Booking> bookings;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDateTime accountCreationTime;
 	
 	public Integer getId() {

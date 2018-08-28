@@ -36,8 +36,6 @@ public class UserController {
 		if(!user.isPresent())
 			throw new UserNotFoundException("id- "+id);
 		
-		
-		
 		return user;
 		
 	}
