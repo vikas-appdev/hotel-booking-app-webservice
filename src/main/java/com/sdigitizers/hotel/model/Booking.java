@@ -23,8 +23,7 @@ public class Booking {
 	@JsonIgnore
 	private Room room;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnore
+	@ManyToOne
 	private User user;
 	private LocalDateTime time;
 	private LocalDateTime fromTime;
@@ -41,14 +40,6 @@ public class Booking {
 	
 	@OneToOne(mappedBy="booking")
 	private BookingReview bookingReview;
-
-	public Invoice getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
 
 	private String specialNote;
 	private BookingStatus status;
@@ -162,6 +153,14 @@ public class Booking {
 		return price;
 	}
 	
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	
 	public BookingReview getBookingReview() {
 		return bookingReview;
 	}
@@ -181,4 +180,6 @@ public class Booking {
 	public double getDiscountedPrice() {
 		return price - discountAmount;
 	}
+	
+	
 }
