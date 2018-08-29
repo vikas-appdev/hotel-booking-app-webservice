@@ -1,5 +1,6 @@
 package time;
 
+import java.util.Date;
 
 /**
  * Meant to be used only for Android Development Purpose
