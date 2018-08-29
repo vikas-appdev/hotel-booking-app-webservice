@@ -1,7 +1,5 @@
 package com.sdigitizers.hotel.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Embedded;
@@ -12,6 +10,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import time.LocalDate;
 
 @Entity
 public class User {
@@ -142,11 +142,11 @@ public class User {
 	}
 	
 	/////
-	
+	/*
 	public int getAge() {
 		return LocalDate.now().getYear()-getDateOfBirth().getYear();
 	}
-
+*/
 	public String getGender() {
 		return gender;
 	}
