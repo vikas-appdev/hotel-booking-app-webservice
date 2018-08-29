@@ -36,7 +36,7 @@ public class User {
 	@JsonIgnore
 	private List<Booking> bookings;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDateTime accountCreationTime;
+	private LocalDate accountCreationTime;
 	
 	public Integer getId() {
 		return id;
@@ -133,11 +133,11 @@ public class User {
 	}
 
 
-	public LocalDateTime getAccountCreationTime() {
+	public LocalDate getAccountCreationTime() {
 		return accountCreationTime;
 	}
 
-	public void setAccountCreationTime(LocalDateTime accountCreationTime) {
+	public void setAccountCreationTime(LocalDate accountCreationTime) {
 		this.accountCreationTime = accountCreationTime;
 	}
 	
