@@ -2,6 +2,7 @@ package com.sdigitizers.hotel.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class User {
 	private String countryCode;
 	private long phone;
 	private String email;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private LocalDate dateOfBirth;
 	@Embedded
 	private Address address;
@@ -35,7 +36,8 @@ public class User {
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<Booking> bookings;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private LocalDate accountCreationTime;
 	
 	public Integer getId() {
