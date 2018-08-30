@@ -3,14 +3,11 @@ package com.sdigitizers.hotel.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -27,17 +24,17 @@ public class User {
 	private String countryCode;
 	private long phone;
 	private String email;
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	@Embedded
 	private Address address;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Booking> bookings;
-	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDateTime accountCreationTime;
-	
+	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate accountCreationTime;
+
 	public Integer getId() {
 		return id;
 	}
@@ -53,11 +50,6 @@ public class User {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	
-	
-
-	
 
 	public boolean isActive() {
 		return active;
@@ -122,8 +114,7 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -132,19 +123,18 @@ public class User {
 		this.password = password;
 	}
 
-
-	public LocalDateTime getAccountCreationTime() {
+	public LocalDate getAccountCreationTime() {
 		return accountCreationTime;
 	}
 
-	public void setAccountCreationTime(LocalDateTime accountCreationTime) {
+	public void setAccountCreationTime(LocalDate accountCreationTime) {
 		this.accountCreationTime = accountCreationTime;
 	}
-	
+
 	/////
-	
+
 	public int getAge() {
-		return LocalDate.now().getYear()-getDateOfBirth().getYear();
+		return LocalDate.now().getYear() - getDateOfBirth().getYear();
 	}
 
 	public String getGender() {
@@ -154,7 +144,5 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
 
 }

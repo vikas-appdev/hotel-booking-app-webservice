@@ -10,7 +10,7 @@ public class Address {
 	private String state;
 	private int pincode;
 	private String country;
-	private String locationCoordinates;
+	
 
 	public String getStreet() {
 		return street;
@@ -57,31 +57,12 @@ public class Address {
 		return this;
 	}
 
-	public String getLocationCoordinates() {
-		return locationCoordinates;
-	}
-
-	public Address setLocationCoordinates(String locationCoordinates) {
-		this.locationCoordinates = locationCoordinates;
-		return this;
-	}
 	
 	@Override
 	public String toString() {
 		return street+", "+city+", "+state+", ["+pincode+"], "+country;
 	}
 
-	public double getLatitude() {
-		if(null != locationCoordinates && locationCoordinates.contains(",")) {
-			return Double.parseDouble(locationCoordinates.split(",")[0]);
-		}
-		return 0;
-	}
-	public double getLongitude() {
-		if(null != locationCoordinates && locationCoordinates.contains(",")) {
-			return Double.parseDouble(locationCoordinates.split(",")[1]);
-		}
-		return 0;
-	}
+	
 	
 }
