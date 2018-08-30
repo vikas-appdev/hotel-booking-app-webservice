@@ -37,6 +37,7 @@ public class User {
 	@JsonIgnore
 	private List<Booking> bookings;
 	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonIgnore
 	@CreationTimestamp
 	private LocalDateTime accountCreationTime;
 
