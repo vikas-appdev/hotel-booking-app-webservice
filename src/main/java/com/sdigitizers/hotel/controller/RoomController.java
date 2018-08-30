@@ -29,12 +29,12 @@ public class RoomController {
 	@Autowired
 	private HotelRepository hotelRepository;
 	
-	@GetMapping("hotels/{lat}/{lung}/{dist}/{page}")
-	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist, @PathVariable Pageable page) {
+	@GetMapping("hotels/{lat}/{lung}/{dist}")
+	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist) {
 		
 		
 		
-		return hotelRepository.findHotelByLocation(lat, lung, dist, page);
+		return hotelRepository.findHotelByLocation(lat, lung, dist);
 		
 	}
 	

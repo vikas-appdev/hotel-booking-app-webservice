@@ -14,8 +14,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 	static final String HAVERSINE_PART = "(6371 * acos(cos(radians(:latitude)) * cos(radians(m.latitude)) "
 			+ "* cos(radians(m.longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(m.latitude))))";
 
-	@Query("SELECT m FROM Entity m WHERE "+HAVERSINE_PART+" < :distance ORDER BY "+HAVERSINE_PART+" DESC")
+	//@Query("SELECT m FROM Hotel m WHERE "+HAVERSINE_PART+" < :distance ORDER BY "+HAVERSINE_PART+" DESC")
+	
+	@Query(value="select * , 6371 * acos(cos(radians(78.3232)) * cos(radians(:latitude)) * cos(radians(:longitude) - radians(65.3234)) + sin(radians(78.3232)) * sin(radians(:latitude)) ) as distance from hotel having :distance < 1 order by distance", nativeQuery=true)
 	public List<Hotel> findHotelByLocation(@Param("latitude") final double latitude, 
-			@Param("longitude") final double longitude, @Param("distance") final double distance, Pageable pageable);
+			@Param("longitude") final double longitude, @Param("distance") final double distance);
 
 }
