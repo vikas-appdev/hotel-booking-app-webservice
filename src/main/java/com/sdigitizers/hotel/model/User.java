@@ -3,11 +3,15 @@ package com.sdigitizers.hotel.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,7 +37,8 @@ public class User {
 	@JsonIgnore
 	private List<Booking> bookings;
 	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate accountCreationTime;
+	@CreationTimestamp
+	private LocalDateTime accountCreationTime;
 
 	public Integer getId() {
 		return id;
@@ -123,11 +128,11 @@ public class User {
 		this.password = password;
 	}
 
-	public LocalDate getAccountCreationTime() {
+	public LocalDateTime getAccountCreationTime() {
 		return accountCreationTime;
 	}
 
-	public void setAccountCreationTime(LocalDate accountCreationTime) {
+	public void setAccountCreationTime(LocalDateTime accountCreationTime) {
 		this.accountCreationTime = accountCreationTime;
 	}
 

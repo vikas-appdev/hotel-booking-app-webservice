@@ -15,7 +15,7 @@ public class PostJson {
 		
 		User user = new User();
 		
-		user.setAccountCreationTime(LocalDateTime.now());
+		//user.setAccountCreationTime(LocalDateTime.now());
 		user.setActive(true);
 		user.setCountryCode("91");
 		user.setDateOfBirth(LocalDate.now());
