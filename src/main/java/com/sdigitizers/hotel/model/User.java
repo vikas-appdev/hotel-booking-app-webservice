@@ -1,9 +1,9 @@
 package com.sdigitizers.hotel.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ public class User {
 	private String countryCode;
 	private long phone;
 	private String email;
-	@Column(columnDefinition="date")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	@Embedded
 	private Address address;
@@ -36,8 +36,7 @@ public class User {
 	@JsonIgnore
 	private List<Booking> bookings;
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	@Column(columnDefinition="date")
-	private LocalDate accountCreationTime;
+	private LocalDateTime accountCreationTime;
 	
 	public Integer getId() {
 		return id;
@@ -134,20 +133,20 @@ public class User {
 	}
 
 
-	public LocalDate getAccountCreationTime() {
+	public LocalDateTime getAccountCreationTime() {
 		return accountCreationTime;
 	}
 
-	public void setAccountCreationTime(LocalDate accountCreationTime) {
+	public void setAccountCreationTime(LocalDateTime accountCreationTime) {
 		this.accountCreationTime = accountCreationTime;
 	}
 	
 	/////
-	/*
+	
 	public int getAge() {
 		return LocalDate.now().getYear()-getDateOfBirth().getYear();
 	}
-*/
+
 	public String getGender() {
 		return gender;
 	}
