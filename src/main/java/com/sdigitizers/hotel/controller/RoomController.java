@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,17 @@ public class RoomController {
 	
 	@Autowired
 	private HotelRepository hotelRepository;
+	
+	@GetMapping("hotels/{lat}/{lung}/{dist}/{page}")
+	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist, @PathVariable Pageable page) {
+		
+		
+		
+		return hotelRepository.findHotelByLocation(lat, lung, dist, page);
+		
+	}
+	
+	
 	
 	@GetMapping("rooms")
 	public List<Room> retriveAllRoom(){
