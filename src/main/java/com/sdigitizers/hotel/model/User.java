@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,6 +41,20 @@ public class User {
 	@JsonIgnore
 	@CreationTimestamp
 	private LocalDateTime accountCreationTime;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<FabRoom> fabroom;
+	
+
+
+	public List<FabRoom> getFabroom() {
+		return fabroom;
+	}
+
+	public void setFabroom(List<FabRoom> fabroom) {
+		this.fabroom = fabroom;
+	}
 
 	public Integer getId() {
 		return id;

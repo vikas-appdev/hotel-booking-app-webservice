@@ -30,6 +30,20 @@ public class Room {
 	@OneToMany(mappedBy="room")
 	private List<RoomImage> images;
 	
+	@OneToMany(mappedBy="room")
+	@JsonIgnore
+	private List<FabRoom> fabRoom;
+	
+	
+	
+	public List<FabRoom> getFabRoom() {
+		return fabRoom;
+	}
+
+	public void setFabRoom(List<FabRoom> fabRoom) {
+		this.fabRoom = fabRoom;
+	}
+
 	public List<RoomImage> getImages() {
 		return images;
 	}
