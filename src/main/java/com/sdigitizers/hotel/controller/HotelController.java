@@ -39,6 +39,7 @@ public class HotelController {
 	public ResponseEntity<Object> createHotel(@RequestBody Hotel hotel) {
 		Hotel savedHotel = hotelRepository.save(hotel);
 		
+		
 		URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
 		.path("/{id}")

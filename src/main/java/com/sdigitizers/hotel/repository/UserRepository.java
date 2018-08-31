@@ -17,5 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByEmailOrName(@Param("email") String email,
 	                                 @Param("name") String name);*/
 	
+	User findByEmailAndPassword(String email, String password);
+	
 
 }

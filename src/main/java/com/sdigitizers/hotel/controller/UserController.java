@@ -40,6 +40,11 @@ public class UserController {
 		
 	}
 	
+	@GetMapping("users/{email}/{pass}")
+	public User retriveUserByEmailAndPassword(@PathVariable String email, @PathVariable String pass) {
+		return userRepository.findByEmailAndPassword(email, pass);
+	}
+	
 	
 	@GetMapping("/users")
 	public List<User> retriveAllUsers(){

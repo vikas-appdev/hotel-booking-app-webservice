@@ -21,5 +21,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 			+ "having distance < :distance order by distance", nativeQuery=true)
 	public List<Hotel> findHotelByLocation(@Param("latitude") final double latitude, 
 			@Param("longitude") final double longitude, @Param("distance") final double distance);
+	
+	
 
 }
