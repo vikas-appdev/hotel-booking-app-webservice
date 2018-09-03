@@ -40,8 +40,8 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("users/{email}/{pass}")
-	public User retriveUserByEmailAndPassword(@PathVariable String email, @PathVariable String pass) {
+	@PostMapping("login")
+	public User retriveUserByEmailAndPassword(@RequestBody String email, @RequestBody String pass) {
 		return userRepository.findByEmailAndPassword(email, pass);
 	}
 	
