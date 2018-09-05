@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.sdigitizers.hotel.AdminNotFoundException;
 import com.sdigitizers.hotel.UserNotFoundException;
 import com.sdigitizers.hotel.model.Admin;
 import com.sdigitizers.hotel.model.Hotel;
@@ -21,7 +22,11 @@ public class AdminController {
 	private AdminRepository adminRepository;
 
 	@GetMapping("admins")
-	public List<Admin> retriveAllAdmins() {
-		return adminRepository.findAll();
+	public Admin retriveAdmin() {
+		Admin one = adminRepository.getOne(1);
+		if(one.getEmail()==null) {
+			new AdminNotFoundException("Not FOund");
+		}
+		return one;
 	}
 }
