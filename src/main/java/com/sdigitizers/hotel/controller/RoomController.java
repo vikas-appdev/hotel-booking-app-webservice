@@ -1,11 +1,15 @@
 package com.sdigitizers.hotel.controller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,12 +33,13 @@ public class RoomController {
 	@Autowired
 	private HotelRepository hotelRepository;
 	
-	@GetMapping("hotels/{lat}/{lung}/{dist}")
-	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist) {
+	@GetMapping("hotels/{lat}/{lung}/{dist}/{from}/{upto}/{category}")
+	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist,
+			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime upto, @PathVariable int category) {
 		
 		
 		
-		return hotelRepository.findHotelByLocation(lat, lung, dist);
+		return hotelRepository.findHotelByLocation(lat, lung, dist, from, upto, category);
 		
 	}
 	
