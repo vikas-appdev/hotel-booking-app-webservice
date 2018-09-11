@@ -7,6 +7,6 @@ import com.sdigitizers.hotel.model.User;
 
 public interface FabRoomRepository extends JpaRepository<FabRoom, Integer> {
 	
-	FabRoom findByUserId(int id);
+	FabRoom findByUserId(int userId);
 
 }

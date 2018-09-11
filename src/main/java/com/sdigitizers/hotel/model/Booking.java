@@ -24,6 +24,7 @@ public class Booking {
 	@JsonIgnore
 	private Room room;
 	
+	
 	@ManyToOne
 	private User user;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

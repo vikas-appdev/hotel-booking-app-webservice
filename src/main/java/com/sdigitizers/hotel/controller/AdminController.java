@@ -21,12 +21,17 @@ public class AdminController {
 	@Autowired
 	private AdminRepository adminRepository;
 
-	@GetMapping("admins")
+	@GetMapping("admin")
 	public Admin retriveAdmin() {
 		Admin one = adminRepository.getOne(1);
 		if(one.getEmail()==null) {
 			new AdminNotFoundException("Not FOund");
 		}
 		return one;
+	}
+	
+	@GetMapping("superadmins")
+	public List<Admin> retriveAllHotels() {
+		return adminRepository.findAll();
 	}
 }

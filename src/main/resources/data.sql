@@ -43,3 +43,10 @@ insert into room_image(id, url, room_id) values(50018, 'http://www.qygjxz.com/da
 insert into room_image(id, url, room_id) values(50019, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
 insert into room_image(id, url, room_id) values(50020, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 11002);
 
+insert into user
+(id, account_creation_time, active, city,country,latitude,longitude,pincode,state,street,country_code,date_of_birth,email,gender,image_link,name,password,phone) 
+values
+(111,'2018-09-07 15:40:53.599',1,'Jorhat','India','19','19',785001,'Assam','Fancy Ali','91','2018-08-30','manmundra00@gmail.com','male','http:','name','qwerty',	0);
+
+insert into admin(id, email, password) values(1001, 'test@test.com', 'test');
+insert into fab_room(id, room_id, user_id) values(1222, 11001, 111);

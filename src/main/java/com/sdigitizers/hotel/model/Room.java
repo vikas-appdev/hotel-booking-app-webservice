@@ -34,23 +34,6 @@ public class Room {
 	@JsonIgnore
 	private List<FabRoom> fabRoom;
 	
-	
-	
-	public List<FabRoom> getFabRoom() {
-		return fabRoom;
-	}
-
-	public void setFabRoom(List<FabRoom> fabRoom) {
-		this.fabRoom = fabRoom;
-	}
-
-	public List<RoomImage> getImages() {
-		return images;
-	}
-
-	public void setImages(List<RoomImage> images) {
-		this.images = images;
-	}
 
 	@OneToMany(mappedBy="room")
 	@JsonIgnore
@@ -240,6 +223,22 @@ public class Room {
     public double getDiscountedPrice() {
     	return price - getDiscountAmount();
     }
+    
+    public List<FabRoom> getFabRoom() {
+		return fabRoom;
+	}
+
+	public void setFabRoom(List<FabRoom> fabRoom) {
+		this.fabRoom = fabRoom;
+	}
+
+	public List<RoomImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<RoomImage> images) {
+		this.images = images;
+	}
     
 
 }
