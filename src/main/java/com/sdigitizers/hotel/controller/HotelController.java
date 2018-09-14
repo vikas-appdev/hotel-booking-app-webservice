@@ -39,6 +39,7 @@ public class HotelController {
 	}
 	
 	@PostMapping("hotels")
+	
 	public ResponseEntity<Object> createHotel(@RequestBody Hotel hotel) {
 		Hotel savedHotel = hotelRepository.save(hotel);
 		

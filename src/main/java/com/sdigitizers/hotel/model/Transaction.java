@@ -17,7 +17,7 @@ import com.sdigitizers.hotel.codec.TransactionType;
 @Entity
 public class Transaction {
 	@Id
-	private Integer id;
+	private Long id;
 	@OneToOne
 	private Booking booking;
 	@CreationTimestamp
@@ -34,16 +34,16 @@ public class Transaction {
 	private PaymentMode paymentMode;
 	private String gateway;
 	private String gateway_txn_ref;
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Booking getBooking() {
 		return booking;
 	}
-	public void setBookingId(Booking booking) {
+	public void setBooking(Booking booking) {
 		this.booking = booking;
 	}
 	public LocalDateTime getDateTime() {

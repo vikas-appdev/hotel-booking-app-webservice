@@ -30,11 +30,25 @@ public class FabRoomController {
 	@Autowired
 	private FabRoomRepository fabRoomRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
 	
 	
-	@GetMapping("fabrooms/{userid}")
-	public FabRoom retriveUser(@PathVariable int userid) {
-		return fabRoomRepository.findByUserId(userid);
+	
+	@GetMapping("fabrooms/{email}")
+	public FabRoom retriveUser(@PathVariable String email) {
+		
+		Optional<User> userOptional = userRepository.findByEmail(email);
+		
+		if(!userOptional.isPresent()) {
+			throw new UserNotFoundException("id- "+email);
+		}
+		
+		User user = userOptional.get();
+		
+		
+		return fabRoomRepository.findByUserId(user.getId());
+		
 		
 	}
 	

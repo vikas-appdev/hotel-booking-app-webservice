@@ -50,3 +50,23 @@ values
 
 insert into admin(id, email, password) values(1001, 'test@test.com', 'test');
 insert into fab_room(id, room_id, user_id) values(1222, 11001, 111);
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(1,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_airport.jpg','19','19','airport');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(2,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_isbt.jpg','19','19','isbt');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(3,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_jalukbari.jpg','19','19','jalukbari');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(4,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_khanapara.jpg','19','19','khanapara');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(5,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_paltan_bazar.jpg','19','19','paltanbazar');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(6,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_railway.jpg','19','19','railway');
+
+
