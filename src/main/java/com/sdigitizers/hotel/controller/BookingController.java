@@ -1,10 +1,13 @@
 package com.sdigitizers.hotel.controller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +51,39 @@ public class BookingController {
 		return bookingRepository.findByUserId(user.getId());
 		
 	}
+	
+	@GetMapping("room/bookings/{email}/{uptoTime}")
+	public Booking retriveBookingByUserAndUpto(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoTime) {
+		
+		Optional<User> userOptional = userRepository.findByEmail(email);
+		
+		if(!userOptional.isPresent()) {
+			throw new UserNotFoundException("id- "+email);
+		}
+		
+		User user = userOptional.get();
+		
+		
+		return bookingRepository.findByUptoTimeLessThanEqualAndUserId(uptoTime, user.getId());
+		
+	}
+	
+	@GetMapping("room/bookings/{email}/from/{from}")
+	public Booking retriveBookingByUserAndFrom(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from) {
+		
+		Optional<User> userOptional = userRepository.findByEmail(email);
+		
+		if(!userOptional.isPresent()) {
+			throw new UserNotFoundException("id- "+email);
+		}
+		
+		User user = userOptional.get();
+		
+		
+		return bookingRepository.findByFromTimeGreaterThanEqualAndUserId(from, user.getId());
+		
+	}
+	
 	
 	
 	@PostMapping("room/bookings")
