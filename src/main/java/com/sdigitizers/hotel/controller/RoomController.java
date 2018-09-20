@@ -2,6 +2,7 @@ package com.sdigitizers.hotel.controller;
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,10 +38,14 @@ public class RoomController {
 	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist,
 			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime upto, @PathVariable int category) {
 		
+		List<Hotel> hotelsFound = hotelRepository.findHotelByLocation(lat, lung, dist, category);
+		List<Hotel> hotelsBusy = hotelRepository.findBusyRooms(from, upto);
 		
+		for(Hotel h : hotelsBusy) {
+			hotelsFound.remove(h);
+		}
 		
-		return hotelRepository.findHotelByLocation(lat, lung, dist, from, upto, category);
-		
+		return hotelsFound;
 	}
 	
 	

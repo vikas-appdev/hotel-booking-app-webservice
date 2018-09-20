@@ -4,11 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +18,6 @@ import com.sdigitizers.hotel.model.FabRoom;
 import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.FabRoomRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 public class FabRoomController {
@@ -36,7 +31,7 @@ public class FabRoomController {
 	
 	
 	@GetMapping("fabrooms/{email}")
-	public FabRoom retriveUser(@PathVariable String email) {
+	public List<FabRoom> retriveUser(@PathVariable String email) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
 		
@@ -51,11 +46,6 @@ public class FabRoomController {
 		
 		
 	}
-	
-	
-	
-	
-	
 	
 	@GetMapping("/fabrooms")
 	public List<FabRoom> retriveAllUsers(){
