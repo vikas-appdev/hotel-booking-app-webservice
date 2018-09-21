@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.sdigitizers.hotel.model.Hotel;
+import com.sdigitizers.hotel.model.Room;
 
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 	/*
@@ -21,7 +22,6 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 			+ "radians(:longitude)) + sin(radians(:latitude)) * sin(radians(h.latitude)) )) as distance from hotel as h JOIN room as r ON h.id=r.hotel_id"
 			+ " WHERE r.category= :category group by h.id "
 			+ "having distance < :distance order by distance", nativeQuery=true)
-	
 	public List<Hotel> findHotelByLocation(@Param("latitude") final double latitude, 
 			@Param("longitude") final double longitude, @Param("distance") final double distance, 
 			@Param("category") final int category);
@@ -33,10 +33,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 	public List<Hotel> findAvailableRooms(@Param("fromTime") final LocalDateTime fromTime, @Param("uptoTime") final LocalDateTime uptoTime);
 
 	
-	@Query(value="select h.id from hotel as h JOIN room as r ON h.id=r.hotel_id LEFT JOIN "
-			+ "booking as b ON r.id=b.room_id WHERE  (:fromTime > b.from_time && :fromTime < b.upto_time) "
-			+ "|| (:uptoTime > b.from_time && :uptoTime < b.upto_time) ", nativeQuery=true)
-	public List<Hotel> findBusyRooms(@Param("fromTime") final LocalDateTime fromTime, @Param("uptoTime") final LocalDateTime uptoTime);
+	@Query(value="select r.id from room as r LEFT JOIN "
+			+ "booking as b ON r.id=b.room_id WHERE  (:fromTime >= b.from_time && :fromTime <= b.upto_time) "
+			+ "|| (:uptoTime >= b.from_time && :uptoTime <= b.upto_time ) ", nativeQuery=true)
+	public List<Integer> findBusyRooms(@Param("fromTime") final LocalDateTime fromTime, @Param("uptoTime") final LocalDateTime uptoTime);
 }
 
 

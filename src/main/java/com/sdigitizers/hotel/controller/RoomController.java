@@ -39,10 +39,16 @@ public class RoomController {
 			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime upto, @PathVariable int category) {
 		
 		List<Hotel> hotelsFound = hotelRepository.findHotelByLocation(lat, lung, dist, category);
-		List<Hotel> hotelsBusy = hotelRepository.findBusyRooms(from, upto);
+		List<Integer> busyRoomsId = hotelRepository.findBusyRooms(from, upto);
 		
-		for(Hotel h : hotelsBusy) {
-			hotelsFound.remove(h);
+		for(Hotel h : hotelsFound) {
+            for(Room r : h.getRooms()) {
+            	for(int i : busyRoomsId) {
+    				if(r.getId()==i) {
+    					h.getRooms().remove(new Room(i));
+    				}
+    			}		
+            }
 		}
 		
 		return hotelsFound;
