@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdigitizers.hotel.codec.BookingStatus;
@@ -27,11 +29,12 @@ public class Booking {
 	
 	@ManyToOne
 	private User user;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
 	private LocalDateTime time;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime fromTime;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime uptoTime;
 	private String bookedFor;
 	private String countryCode;

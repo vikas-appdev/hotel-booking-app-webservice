@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.sdigitizers.hotel.codec.RoomCategory;
 
 @Entity
@@ -238,6 +239,10 @@ public class Room {
 
 	public void setImages(List<RoomImage> images) {
 		this.images = images;
+	}
+	
+	public int getHotelId() {
+		return hotel.getId();
 	}
     
 
