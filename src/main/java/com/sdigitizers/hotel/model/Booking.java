@@ -23,7 +23,6 @@ public class Booking {
 	private Integer id;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Room room;
 	
 	
