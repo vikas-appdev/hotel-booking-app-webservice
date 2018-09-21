@@ -38,7 +38,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("room/bookings/{email}")
-	public Booking retriveBookingByUser(@PathVariable String email) {
+	public List<Booking> retriveBookingByUser(@PathVariable String email) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
 		
@@ -53,7 +53,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("room/bookings/{email}/{uptoTime}")
-	public Booking retriveBookingByUserAndUpto(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoTime) {
+	public List<Booking> retriveBookingByUserAndUpto(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoTime) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
 		
@@ -69,7 +69,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("room/bookings/{email}/from/{from}")
-	public Booking retriveBookingByUserAndFrom(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from) {
+	public List<Booking> retriveBookingByUserAndFrom(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
 		
