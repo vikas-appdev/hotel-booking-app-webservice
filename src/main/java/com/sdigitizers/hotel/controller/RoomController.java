@@ -16,13 +16,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.HotelNotFoundException;
+import com.sdigitizers.hotel.UserNotFoundException;
+import com.sdigitizers.hotel.fileupload.FileStorageService;
+import com.sdigitizers.hotel.fileupload.UploadFileResponse;
 import com.sdigitizers.hotel.model.Hotel;
 import com.sdigitizers.hotel.model.Room;
+import com.sdigitizers.hotel.model.RoomImage;
+import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.HotelRepository;
+import com.sdigitizers.hotel.repository.RoomImageRepository;
 import com.sdigitizers.hotel.repository.RoomRepository;
 
 @RestController
@@ -34,6 +42,15 @@ public class RoomController {
 	@Autowired
 	private HotelRepository hotelRepository;
 	
+	@Autowired
+    private FileStorageService fileStorageService;
+	
+	@Autowired
+	private RoomImageRepository roomImageRepository;
+	
+	/*@Autowired
+	private RoomImage roomImage;*/
+	
 	@GetMapping("hotels/{lat}/{lung}/{dist}/{from}/{upto}/{category}")
 	public List<Hotel> retriveHotelbyLocation(@PathVariable double lat, @PathVariable double lung, @PathVariable int dist,
 			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime upto, @PathVariable int category) {
@@ -42,13 +59,19 @@ public class RoomController {
 		List<Integer> busyRoomsId = hotelRepository.findBusyRooms(from, upto);
 		
 		for(Hotel h : hotelsFound) {
-            for(Room r : h.getRooms()) {
+		     List<Room> rooms = new ArrayList<>();
+		     for(Room r : h.getRooms()) {
+		    	 rooms.add(r);
+		     }
+            for(Room r : rooms) {
             	for(int i : busyRoomsId) {
     				if(r.getId()==i) {
     					h.getRooms().remove(new Room(i));
+    				//	rooms.remove(r);
     				}
     			}		
             }
+           // h.setRooms(rooms);
 		}
 		
 		return hotelsFound;
@@ -98,5 +121,39 @@ public class RoomController {
 		return ResponseEntity.created(location).build();
 		
 	}
+	
+	
+	
+	@PostMapping("/{roomid}/uploadroomimage")
+    public UploadFileResponse uploadFile(@PathVariable int roomid, @RequestParam MultipartFile file) {
+		
+		Optional<Room> roomOptional = roomRepository.findById(roomid);
+		if(!roomOptional.isPresent())
+			throw new UserNotFoundException("id- "+roomid);
+		
+		
+		
+        String fileName = fileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder
+        		//.fromPath("https://www.sanatandigitizers.com")
+        		.fromCurrentContextPath()
+                .path("/images/")
+                .path(fileName)
+                .toUriString();
+        
+        Room room = roomOptional.get();
+        
+        RoomImage roomImage = new RoomImage();
+        roomImage.setRoom(room);
+        roomImage.setUrl(fileDownloadUri);
+        
+        roomImageRepository.save(roomImage);
+        
+        
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
 
 }

@@ -52,6 +52,14 @@ public class BookingController {
 		
 	}
 	
+	
+	@GetMapping("booking/validate/{fromDateTime}/{upToDateTime}/{roomId}")
+	public boolean validateBookingForRoom(@PathVariable int roomId, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime fromDateTime,
+			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoDateTime) {
+		List<Booking> bookingsFound = bookingRepository.findBookingsForRoom(roomId, fromDateTime, uptoDateTime);
+		return bookingsFound==null?true:(bookingsFound.isEmpty());
+	}
+	
 	@GetMapping("room/bookings/{email}/{uptoTime}")
 	public List<Booking> retriveBookingByUserAndUpto(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoTime) {
 		
@@ -87,15 +95,15 @@ public class BookingController {
 	
 	
 	@PostMapping("room/bookings")
-	public ResponseEntity<Object> createBooking(@RequestBody Booking booking) {
-		Booking savedBooking = bookingRepository.save(booking);
+	public Booking createBooking(@RequestBody Booking booking) {
+		return bookingRepository.save(booking);
 		
-		URI location = ServletUriComponentsBuilder
+		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
 		.path("/{id}")
 		.buildAndExpand(savedBooking.getId()).toUri();
 		
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).build();*/
 		
 	}
 

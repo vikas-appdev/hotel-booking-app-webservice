@@ -55,11 +55,11 @@ public class HotelController {
 	
 	@GetMapping("/hotels/{id}")
 	public Optional<Hotel> retriveUserByEmail(@PathVariable int id) {
-		Optional<Hotel> user = hotelRepository.findById(id);
+		Optional<Hotel> hotel = hotelRepository.findById(id);
 		/*if(!user.isPresent())
 			throw new UserNotFoundException("id- "+id);*/
 		
-		return user;
+		return hotel;
 		
 	}
 

@@ -10,8 +10,9 @@ import javax.persistence.OneToOne;
 @Entity
 public class BookingReview implements Serializable {
 
-	@OneToOne
 	@Id
+	private Long Id;
+	@OneToOne
 	private Booking booking;
 	private LocalDateTime time;
 	private int rating;

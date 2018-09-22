@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class RoomImage {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -39,6 +39,11 @@ public class RoomImage {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public int getRoomId() {
+		return room.getId();
+		
 	}
 	
 	

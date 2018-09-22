@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.sdigitizers.hotel.codec.BookingStatus;
 import com.sdigitizers.hotel.model.Hotel;
 import com.sdigitizers.hotel.model.Room;
 
@@ -34,8 +35,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
 	
 	@Query(value="select r.id from room as r LEFT JOIN "
-			+ "booking as b ON r.id=b.room_id WHERE  (:fromTime >= b.from_time && :fromTime <= b.upto_time) "
-			+ "|| (:uptoTime >= b.from_time && :uptoTime <= b.upto_time ) ", nativeQuery=true)
+			+ "booking as b ON r.id=b.room_id WHERE  ((:fromTime >= b.from_time && :fromTime <= b.upto_time) "
+			+ "|| (:uptoTime >= b.from_time && :uptoTime <= b.upto_time )) "
+			+ " && b.status != 4", nativeQuery=true)
 	public List<Integer> findBusyRooms(@Param("fromTime") final LocalDateTime fromTime, @Param("uptoTime") final LocalDateTime uptoTime);
 }
 
