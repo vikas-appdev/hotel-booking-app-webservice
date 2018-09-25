@@ -19,15 +19,16 @@ public class RoomImage {
 	
 	private String url;
 	
-	public int getId() {
+	
+	
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
-	
 	public Room getRoom() {
 		return room;
 	}

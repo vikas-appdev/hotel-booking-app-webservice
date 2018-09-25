@@ -55,8 +55,18 @@ public class Room {
 	private boolean ac;
 	private boolean wifi;
 	private boolean tv;
-	private boolean cleanToilet;
 	private boolean service24_7;
+	private boolean geyser;
+	private boolean miniFridge;
+	private boolean heater;
+	private boolean parking;
+	private boolean livingRoom;
+	private boolean resturant;
+	private boolean dining;
+	private boolean cctv;
+	private boolean complementryBreakfast;
+	
+	
 
 	public Room() { }
 	public Room(int id) { this.id = id; }
@@ -194,18 +204,64 @@ public class Room {
 		this.tv = tv;
 	}
 
-	public boolean isCleanToilet() {
-		return cleanToilet;
-	}
-
-	public void setCleanToilet(boolean cleanToilet) {
-		this.cleanToilet = cleanToilet;
-	}
-
 	public boolean isService24_7() {
 		return service24_7;
 	}
 
+	public boolean isGeyser() {
+		return geyser;
+	}
+	public void setGeyser(boolean geyser) {
+		this.geyser = geyser;
+	}
+	public boolean isMiniFridge() {
+		return miniFridge;
+	}
+	public void setMiniFridge(boolean miniFridge) {
+		this.miniFridge = miniFridge;
+	}
+	public boolean isHeater() {
+		return heater;
+	}
+	public void setHeater(boolean heater) {
+		this.heater = heater;
+	}
+	public boolean isParking() {
+		return parking;
+	}
+	public void setParking(boolean parking) {
+		this.parking = parking;
+	}
+	public boolean isLivingRoom() {
+		return livingRoom;
+	}
+	public void setLivingRoom(boolean livingRoom) {
+		this.livingRoom = livingRoom;
+	}
+	public boolean isResturant() {
+		return resturant;
+	}
+	public void setResturant(boolean resturant) {
+		this.resturant = resturant;
+	}
+	public boolean isDining() {
+		return dining;
+	}
+	public void setDining(boolean dining) {
+		this.dining = dining;
+	}
+	public boolean isCctv() {
+		return cctv;
+	}
+	public void setCctv(boolean cctv) {
+		this.cctv = cctv;
+	}
+	public boolean isComplementryBreakfast() {
+		return complementryBreakfast;
+	}
+	public void setComplementryBreakfast(boolean complementryBreakfast) {
+		this.complementryBreakfast = complementryBreakfast;
+	}
 	public void setService24_7(boolean service24_7) {
 		this.service24_7 = service24_7;
 	}

@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -27,7 +29,10 @@ public class User {
 	private String imageLink;
 	private String name;
 	private String countryCode;
+	@Column(unique=true)
 	private long phone;
+	@Column(unique=true)
+	@Email
 	private String email;
 	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;

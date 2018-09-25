@@ -131,6 +131,8 @@ public class RoomController {
 		if(!roomOptional.isPresent())
 			throw new UserNotFoundException("id- "+roomid);
 		
+		Room room = roomOptional.get();
+		
 		
 		
         String fileName = fileStorageService.storeFile(file);
@@ -142,13 +144,12 @@ public class RoomController {
                 .path(fileName)
                 .toUriString();
         
-        Room room = roomOptional.get();
+        RoomImage image = new RoomImage();
         
-        RoomImage roomImage = new RoomImage();
-        roomImage.setRoom(room);
-        roomImage.setUrl(fileDownloadUri);
+        image.setRoom(room);
+        image.setUrl(fileDownloadUri);
         
-        roomImageRepository.save(roomImage);
+        roomImageRepository.save(image);
         
         
 

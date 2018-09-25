@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class HotelImage {
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 	
 	@ManyToOne
 	@JsonIgnore
@@ -19,14 +19,15 @@ public class HotelImage {
 	
 	private String url;
 	
-	public int getId() {
+	
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
 	public Hotel getHotel() {
 		return hotel;
 	}
