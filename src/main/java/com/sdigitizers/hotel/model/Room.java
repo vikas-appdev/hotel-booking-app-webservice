@@ -303,6 +303,10 @@ public class Room {
 	public int getHotelId() {
 		return hotel.getId();
 	}
+	
+	public String getHotelName() {
+		return hotel.getName();
+	}
 
 	@Override
 	public int hashCode() {

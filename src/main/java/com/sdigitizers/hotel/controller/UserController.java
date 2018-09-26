@@ -57,15 +57,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		User savedUser = userRepository.save(user);
+	public User createUser(@RequestBody User user) {
+		return userRepository.save(user);
 		
-		URI location = ServletUriComponentsBuilder
+		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
 		.path("/{id}")
 		.buildAndExpand(savedUser.getId()).toUri();
 		
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).build();*/
 		
 	}
 	

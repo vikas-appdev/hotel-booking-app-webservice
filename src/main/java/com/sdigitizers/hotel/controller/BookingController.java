@@ -53,9 +53,9 @@ public class BookingController {
 	}
 	
 	
-	@GetMapping("booking/validate/{fromDateTime}/{upToDateTime}/{roomId}")
-	public boolean validateBookingForRoom(@PathVariable int roomId, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime fromDateTime,
-			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoDateTime) {
+	@GetMapping("booking/validate/{fromDateTime}/{uptoDateTime}/{roomId}")
+	public boolean validateBookingForRoom(@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime fromDateTime,
+			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoDateTime, @PathVariable int roomId) {
 		List<Booking> bookingsFound = bookingRepository.findBookingsForRoom(roomId, fromDateTime, uptoDateTime);
 		return bookingsFound==null?true:(bookingsFound.isEmpty());
 	}
