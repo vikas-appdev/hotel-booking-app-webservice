@@ -55,16 +55,16 @@ public class Room {
 	private boolean ac;
 	private boolean wifi;
 	private boolean tv;
-	private boolean service24_7;
+	private boolean service24x7;
 	private boolean geyser;
 	private boolean miniFridge;
 	private boolean heater;
 	private boolean parking;
 	private boolean livingRoom;
-	private boolean resturant;
+	private boolean restaurant;
 	private boolean dining;
 	private boolean cctv;
-	private boolean complementryBreakfast;
+	private boolean complementaryBreakfast;
 	
 	
 
@@ -204,8 +204,8 @@ public class Room {
 		this.tv = tv;
 	}
 
-	public boolean isService24_7() {
-		return service24_7;
+	public boolean isService24x7() {
+		return service24x7;
 	}
 
 	public boolean isGeyser() {
@@ -238,11 +238,11 @@ public class Room {
 	public void setLivingRoom(boolean livingRoom) {
 		this.livingRoom = livingRoom;
 	}
-	public boolean isResturant() {
-		return resturant;
+	public boolean isRestaurant() {
+		return restaurant;
 	}
-	public void setResturant(boolean resturant) {
-		this.resturant = resturant;
+	public void setRestaurant(boolean restaurant) {
+		this.restaurant = restaurant;
 	}
 	public boolean isDining() {
 		return dining;
@@ -256,14 +256,14 @@ public class Room {
 	public void setCctv(boolean cctv) {
 		this.cctv = cctv;
 	}
-	public boolean isComplementryBreakfast() {
-		return complementryBreakfast;
+	public boolean isComplementaryBreakfast() {
+		return complementaryBreakfast;
 	}
-	public void setComplementryBreakfast(boolean complementryBreakfast) {
-		this.complementryBreakfast = complementryBreakfast;
+	public void setComplementaryBreakfast(boolean complementaryBreakfast) {
+		this.complementaryBreakfast = complementaryBreakfast;
 	}
-	public void setService24_7(boolean service24_7) {
-		this.service24_7 = service24_7;
+	public void setService24x7(boolean service24x7) {
+		this.service24x7 = service24x7;
 	}
 	
 	////

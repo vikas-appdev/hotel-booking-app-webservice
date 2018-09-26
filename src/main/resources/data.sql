@@ -5,8 +5,6 @@ values(1,'Kuchh terms and conditions ','Khanapara', 'https://images.pexels.com/p
 
 insert into room(id, ac, active, category,cctv,complementry_breakfast,couple_allowed,dining, discount_in_percentage, discount_value, family_allowed,geyser,heater,living_room,mini_fridge,name, no_of_persons,parking, price,resturant, service24_7, tv, wifi, hotel_id)
 values(11001, 1, 1, 1, 1, 1,1,1,1,100,1,1,1,1,1, 'test', 1,1, 500, 1, 1, 1,1,10001);
-insert into room(id, ac, active, category, clean_toilet, couple_allowed, discount_in_percentage, discount_value, family_allowed, name, no_of_persons, price, service24_7, tv, wifi, hotel_id)
-values(11002, 1, 1, 1, 1, 1, 0, 100, 1, 'test', 1, 500, 1, 1, 1, 10001);
 
 insert into hotel_image(id, url, hotel_id) values(5001, 'https://www.flightexpert.com/blog/wp-content/uploads/2017/11/Dhaka-Hotels.jpg', 10001);
 insert into hotel_image(id, url, hotel_id) values(5002, 'https://media-cdn.tripadvisor.com/media/photo-s/0e/b9/8a/3e/gomang-boutique-hotel.jpg', 10001);
