@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.HotelNotFoundException;
 import com.sdigitizers.hotel.UserNotFoundException;
+import com.sdigitizers.hotel.exception.NotFounWalaException;
 import com.sdigitizers.hotel.fileupload.FileStorageService;
 import com.sdigitizers.hotel.fileupload.UploadFileResponse;
 import com.sdigitizers.hotel.model.Hotel;
@@ -85,7 +86,7 @@ public class RoomController {
 		return roomRepository.findAll();
 	}
 	
-	@PostMapping("rooms")
+	/*@PostMapping("rooms")
 	public ResponseEntity<Object> createHotel(@RequestBody Room room) {
 		Room save = roomRepository.save(room);
 		
@@ -96,7 +97,7 @@ public class RoomController {
 		
 		return ResponseEntity.created(location).build();
 		
-	}
+	}*/
 	
 	@PostMapping("/hotel/{id}/rooms")
 	public ResponseEntity<Object> createRoom(@PathVariable int id, @RequestBody Room room) {
@@ -161,6 +162,16 @@ public class RoomController {
 	@DeleteMapping("room/{id}")
 	public void deleteRoom(@PathVariable int id) {
 		roomRepository.deleteById(id);
+	}
+	
+	@GetMapping("/hotels/{id}")
+	public Optional<Room> retriveRoomById(@PathVariable int id) {
+		Optional<Room> room = roomRepository.findById(id);
+		if(!room.isPresent())
+			throw new NotFounWalaException("id- "+id);
+		
+		return room;
+		
 	}
 
 }
