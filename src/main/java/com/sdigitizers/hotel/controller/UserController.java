@@ -70,7 +70,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/users/{id}")
-	public ResponseEntity<Object> updateUser(@RequestBody User user,@PathVariable String id) {
+	public User updateUser(@RequestBody User user,@PathVariable String id) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(id);
 		if(!userOptional.isPresent())
@@ -83,9 +83,9 @@ public class UserController {
 		
 		
 		
-		userRepository.save(user);
+		return userRepository.save(user);
 
-		return ResponseEntity.noContent().build();
+		
 		
 	}
 	

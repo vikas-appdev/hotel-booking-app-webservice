@@ -72,7 +72,7 @@ public class BookingController {
 		User user = userOptional.get();
 		
 		
-		return bookingRepository.findByUptoTimeLessThanEqualAndUserId(uptoTime, user.getId());
+		return bookingRepository.findByFromTimeLessThanEqualAndUserId(uptoTime, user.getId());
 		
 	}
 	
