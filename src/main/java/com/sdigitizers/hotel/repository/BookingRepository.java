@@ -13,7 +13,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 	
 	List<Booking> findByUserId(int userId);
 	Booking findByUserIdAndUptoTime(Integer id, LocalDateTime uptoTime);
-	List<Booking> findByUptoTimeLessThanEqualAndUserId(LocalDateTime uptoTime, Integer id);
+	List<Booking> findByFromTimeLessThanEqualAndUserId(LocalDateTime uptoTime, Integer id);
 	List<Booking> findByFromTimeGreaterThanEqualAndUserId(LocalDateTime fromTime, Integer id);
 	
 	@Query(value="select * from booking WHERE room_id= :roomId && ((:fromDateTime BETWEEN from_time AND upto_time) "
