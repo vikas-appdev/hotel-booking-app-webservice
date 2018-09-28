@@ -45,7 +45,7 @@ public class UserController {
 		
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/users/by/{id}")
 	public Optional<User> retriveUserById(@PathVariable int id) {
 		Optional<User> user = userRepository.findById(id);
 		if(!user.isPresent())
