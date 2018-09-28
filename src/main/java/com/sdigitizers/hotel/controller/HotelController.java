@@ -78,7 +78,7 @@ public class HotelController {
 		
 	}
 	
-	@PostMapping("/{hotelid}/uploadroomimage")
+	@PostMapping("/{hotelid}/uploadhotelimage")
     public UploadFileResponse uploadFile(@PathVariable int hotelid, @RequestParam MultipartFile file) {
 		
 		Optional<Hotel> hotelOptional = hotelRepository.findById(hotelid);
