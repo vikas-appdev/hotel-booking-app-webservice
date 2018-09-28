@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sdigitizers.hotel.UserNotFoundException;
 import com.sdigitizers.hotel.codec.BookingStatus;
 import com.sdigitizers.hotel.model.Booking;
+import com.sdigitizers.hotel.model.Hotel;
 import com.sdigitizers.hotel.model.Transaction;
 import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.UserRepository;
@@ -34,9 +35,19 @@ public class UserController {
 	
 	
 	
+	@GetMapping("/users/{email}")
+	public Optional<User> retriveUserByEmail(@PathVariable String email) {
+		Optional<User> user = userRepository.findByEmail(email);
+		if(!user.isPresent())
+			throw new UserNotFoundException("id- "+email);
+		
+		return user;
+		
+	}
+	
 	@GetMapping("/users/{id}")
-	public Optional<User> retriveUserByEmail(@PathVariable String id) {
-		Optional<User> user = userRepository.findByEmail(id);
+	public Optional<User> retriveUserById(@PathVariable int id) {
+		Optional<User> user = userRepository.findById(id);
 		if(!user.isPresent())
 			throw new UserNotFoundException("id- "+id);
 		

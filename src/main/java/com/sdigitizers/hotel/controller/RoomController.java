@@ -164,7 +164,7 @@ public class RoomController {
 		roomRepository.deleteById(id);
 	}
 	
-	@GetMapping("/hotels/{id}")
+	@GetMapping("/rooms/{id}")
 	public Optional<Room> retriveRoomById(@PathVariable int id) {
 		Optional<Room> room = roomRepository.findById(id);
 		if(!room.isPresent())
