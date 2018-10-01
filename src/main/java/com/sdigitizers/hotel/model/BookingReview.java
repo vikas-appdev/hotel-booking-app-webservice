@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -11,6 +12,7 @@ import javax.persistence.OneToOne;
 public class BookingReview implements Serializable {
 
 	@Id
+	@GeneratedValue
 	private Long Id;
 	@OneToOne
 	private Booking booking;
