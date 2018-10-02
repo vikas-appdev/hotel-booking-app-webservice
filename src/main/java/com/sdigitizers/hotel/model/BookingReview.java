@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class BookingReview implements Serializable {
 
@@ -15,12 +17,15 @@ public class BookingReview implements Serializable {
 	@GeneratedValue
 	private Long Id;
 	@OneToOne
+	@JsonIgnore
 	private Booking booking;
 	private LocalDateTime time;
 	private int rating;
 	private String reviewText;
 
-	
+	public int getBookingId() {
+		return booking.getId();
+	}
 
 	public Long getId() {
 		return Id;
