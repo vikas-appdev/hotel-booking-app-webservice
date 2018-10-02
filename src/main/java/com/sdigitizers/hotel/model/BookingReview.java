@@ -22,6 +22,14 @@ public class BookingReview implements Serializable {
 
 	
 
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
 	public Booking getBooking() {
 		return booking;
 	}

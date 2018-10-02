@@ -51,8 +51,13 @@ public class Booking {
 	@OneToOne(mappedBy="booking")
 	private Invoice invoice;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="booking")
 	private BookingReview bookingReview;
+	
+	public Long getBookingReviewId() {
+		return bookingReview.getId();
+	}
 
 	private String specialNote;
 	private BookingStatus status;
