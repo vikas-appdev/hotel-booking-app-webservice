@@ -24,8 +24,19 @@ public class BookingReview implements Serializable {
 	private String reviewText;
 
 	public int getBookingId() {
+		
 		return booking.getId();
 	}
+	
+	public String getBookingUserName() {
+		return booking.getUser().getName();
+	}
+	
+	public String getBookingUserImageUrl(){
+		return booking.getUser().getImageLink();
+	}
+	
+	
 
 	public Long getId() {
 		return Id;
