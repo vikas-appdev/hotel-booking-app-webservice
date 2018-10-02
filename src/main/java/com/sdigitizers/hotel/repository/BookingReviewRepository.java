@@ -10,13 +10,13 @@ import com.sdigitizers.hotel.model.BookingReview;
 
 public interface BookingReviewRepository extends JpaRepository<BookingReview, Long> {
 	
-	@Query(value="select b.* from booking b join room r on b.room_id=r.id join hotel h on h.hotel_id = h.id where h.id = :hotelid", nativeQuery=true)
+	@Query(value="select br.* from booking_review br JOIN booking b ON br.booking_id=b.id join room r on b.room_id=r.id join hotel h on h.hotel_id = h.id where h.id = :hotelid", nativeQuery=true)
 	List<BookingReview> findByHotel(@Param("hotelid") int hotelId);
 	
-	@Query(value="select b.* from booking b join room r on b.room_id=r.id where r.id = :roomid", nativeQuery=true)
+	@Query(value="select br.* from booking_review br JOIN booking b ON br.booking_id=b.id join room r on b.room_id=r.id where r.id = :roomid", nativeQuery=true)
 	List<BookingReview> findByRoom(@Param("roomid") int roomId);
 	
-	@Query(value="select b.* from booking b join user u on b.user_id=u.id where u.id = :userid", nativeQuery=true)
+	@Query(value="select br.* from booking_review br JOIN booking b ON br.booking_id=b.id join user u on b.user_id=u.id where u.id = :userid", nativeQuery=true)
 	List<BookingReview> findByUser(@Param("userid") int userId);
 	
 
