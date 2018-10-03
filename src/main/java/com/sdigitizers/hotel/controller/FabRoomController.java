@@ -60,16 +60,16 @@ public class FabRoomController {
 	}
 	
 	@PostMapping("/fabrooms")
-	public ResponseEntity<Object> createUser(@RequestBody FabRoom fabroom) {
-		FabRoom savedRoom = fabRoomRepository.save(fabroom);
+	public FabRoom createUser(@RequestBody FabRoom fabroom) {
+		return fabRoomRepository.save(fabroom);
 		
 		
-		URI location = ServletUriComponentsBuilder
+		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
 		.path("/{id}")
 		.buildAndExpand(savedRoom.getId()).toUri();
 		
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).build();*/
 		
 	}
 	

@@ -1,18 +1,24 @@
 package com.sdigitizers.hotel.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class FabRoom {
+@IdClass(FabRoomCompositeKey.class)
+public class FabRoom implements Serializable {
 
 	@GeneratedValue
 	@Id
 	private Integer id;
+	
 	@ManyToOne
 	private Room room;
+	@Id
 	@ManyToOne
 	private User user;
 	

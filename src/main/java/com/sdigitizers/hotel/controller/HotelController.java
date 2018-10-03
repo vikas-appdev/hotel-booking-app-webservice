@@ -92,8 +92,8 @@ public class HotelController {
         String fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder
-        		//.fromPath("https://www.sanatandigitizers.com")
-        		.fromCurrentContextPath()
+        		.fromPath("http://45.120.149.244")
+        		//.fromCurrentContextPath()
                 .path("/images/")
                 .path(fileName)
                 .toUriString();
