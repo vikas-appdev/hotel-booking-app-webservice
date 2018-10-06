@@ -139,10 +139,10 @@ public class RoomController {
 		
         String fileName = fileStorageService.storeFile(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder
-        		.fromPath("http://45.120.149.244")
+        String fileDownloadUri = ServletUriComponentsBuilder.fromHttpUrl("http://45.120.149.244")
+        		//.fromPath("45.120.149.244")
         		//.fromCurrentContextPath()
-                .path("/images/")
+                
                 .path(fileName)
                 .toUriString();
         
