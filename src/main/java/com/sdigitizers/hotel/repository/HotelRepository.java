@@ -3,16 +3,25 @@ package com.sdigitizers.hotel.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.sdigitizers.hotel.codec.BookingStatus;
 import com.sdigitizers.hotel.model.Hotel;
-import com.sdigitizers.hotel.model.Room;
 
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {
+	
+	public List<Hotel> findByCity(String city);
+	
+	public List<Hotel> findByCityByOrderByIdAsc(String city);
+	public List<Hotel> findByCityByOrderByIdDesc(String city);
+	
+	public List<Hotel> findByCityByOrderByNameAsc(String city);
+	public List<Hotel> findByCityByOrderByNameDesc(String city);
+	
+	public List<Hotel> findByCityByOrderByCityAsc(String city);
+	public List<Hotel> findByCityByOrderByCityDesc(String city);
+	
 	/*
 	static final String HAVERSINE_PART = "(6371 * acos(cos(radians(:latitude)) * cos(radians(m.latitude)) "
 			+ "* cos(radians(m.longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(m.latitude))))";*/

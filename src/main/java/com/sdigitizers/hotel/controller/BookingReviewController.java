@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.HotelNotFoundException;
+import com.sdigitizers.hotel.codec.BookingStatus;
+import com.sdigitizers.hotel.codec.FeedbackStatus;
 import com.sdigitizers.hotel.exception.NotFounWalaException;
 import com.sdigitizers.hotel.model.Booking;
 import com.sdigitizers.hotel.model.BookingReview;
@@ -31,7 +33,7 @@ public class BookingReviewController {
 	private BookingRepository bookingRepository;
 	
 	@PostMapping("/{id}/bookingreview")
-	public ResponseEntity<Object> saveBookingReview(@PathVariable int id, @RequestBody BookingReview bookingReview) {
+	public BookingReview saveBookingReview(@PathVariable int id, @RequestBody BookingReview bookingReview) {
 		
 		Optional<Booking> bookingOptional = bookingRepository.findById(id);
 		
@@ -44,14 +46,14 @@ public class BookingReviewController {
 		
 		bookingReview.setBooking(booking);
 		
-		bookingReviewRepository.save(bookingReview);
+		BookingReview save = bookingReviewRepository.save(bookingReview);
 		
-		URI location = ServletUriComponentsBuilder
-		.fromCurrentRequest()
-		.path("/{id}")
-		.buildAndExpand(bookingReview.getId()).toUri();
+		booking.setFeedbackStatus(FeedbackStatus.GIVEN);
 		
-		return ResponseEntity.created(location).build();
+		bookingRepository.save(booking);
+		
+		return save;
+		
 		
 	}
 	

@@ -20,5 +20,7 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
 			+ "|| (:uptoDateTime BETWEEN from_time AND upto_time )) "
 			+ " && status != 4", nativeQuery=true)
 	public List<Booking> findBookingsForRoom(@Param("roomId") final int roomId, @Param("fromDateTime") final LocalDateTime fromTime, @Param("uptoDateTime") final LocalDateTime uptoTime);
+	
+	//public List<Booking> findByHotelId(int hotelId);
 
 }

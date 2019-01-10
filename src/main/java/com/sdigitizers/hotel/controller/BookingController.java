@@ -1,6 +1,5 @@
 package com.sdigitizers.hotel.controller;
 
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -8,20 +7,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.UserNotFoundException;
-import com.sdigitizers.hotel.codec.BookingStatus;
 import com.sdigitizers.hotel.exception.NotFounWalaException;
 import com.sdigitizers.hotel.model.Booking;
-import com.sdigitizers.hotel.model.Transaction;
+import com.sdigitizers.hotel.model.Hotel;
+import com.sdigitizers.hotel.model.Room;
 import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.BookingRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
@@ -36,12 +33,12 @@ public class BookingController {
 	private UserRepository userRepository;
 	
 	
-	@GetMapping("room/bookings")
+	@GetMapping("booking")
 	public List<Booking> retriveAllBooking() {
 		return bookingRepository.findAll();
 	}
 	
-	@GetMapping("room/bookings/{email}")
+	@GetMapping("booking/{email}")
 	public List<Booking> retriveBookingByUser(@PathVariable String email) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
@@ -64,7 +61,7 @@ public class BookingController {
 		return bookingsFound==null?true:(bookingsFound.isEmpty());
 	}
 	
-	@GetMapping("room/bookings/{email}/{uptoTime}")
+	@GetMapping("booking/{email}/{uptoTime}")
 	public List<Booking> retriveBookingByUserAndUpto(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime uptoTime) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
@@ -80,7 +77,7 @@ public class BookingController {
 		
 	}
 	
-	@GetMapping("room/bookings/{email}/from/{from}")
+	@GetMapping("booking/{email}/from/{from}")
 	public List<Booking> retriveBookingByUserAndFrom(@PathVariable String email, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from) {
 		
 		Optional<User> userOptional = userRepository.findByEmail(email);
@@ -98,8 +95,12 @@ public class BookingController {
 	
 	
 	
-	@PostMapping("room/bookings")
+	@PostMapping("booking")
 	public Booking createBooking(@RequestBody Booking booking) {
+		//int hotelId = booking.getRoom().getHotelId();
+		
+		//booking.setHotelId(hotelId);
+		
 		return bookingRepository.save(booking);
 		
 		/*URI location = ServletUriComponentsBuilder
@@ -111,7 +112,7 @@ public class BookingController {
 		
 	}
 	
-	@PutMapping("room/bookings/{id}")
+	@PutMapping("booking/{id}")
 	public Booking updateBooking(@RequestBody Booking booking, @PathVariable int id) {
 		
 		Optional<Booking> optional = bookingRepository.findById(id);
@@ -121,10 +122,14 @@ public class BookingController {
 		}
 		
 		
+		booking.setId(id);
 		
-		return bookingRepository.save(optional.get());
+		return bookingRepository.save(booking);
+		
 		
 	}
+	
+	
 	
 
 }

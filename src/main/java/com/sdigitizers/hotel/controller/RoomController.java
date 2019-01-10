@@ -100,7 +100,7 @@ public class RoomController {
 	}*/
 	
 	@PostMapping("/hotel/{id}/rooms")
-	public ResponseEntity<Object> createRoom(@PathVariable int id, @RequestBody Room room) {
+	public Room createRoom(@PathVariable int id, @RequestBody Room room) {
 		
 		Optional<Hotel> hotelOptional = hotelRepository.findById(id);
 		
@@ -113,14 +113,7 @@ public class RoomController {
 		
 		room.setHotel(hotel);
 		
-		roomRepository.save(room);
-		
-		URI location = ServletUriComponentsBuilder
-		.fromCurrentRequest()
-		.path("/{id}")
-		.buildAndExpand(room.getId()).toUri();
-		
-		return ResponseEntity.created(location).build();
+		return roomRepository.save(room);
 		
 	}
 	

@@ -2,7 +2,7 @@ package com.sdigitizers.hotel.codec;
 
 public enum BookingStatus {
   
-	 NA(0), ACTIVE(1), ACKNOWLEDGED(2), NOT_REACHED(3), CANCELLED(4), PAID(5), CANCELLED_REFUNDED(6);
+	 NA(0), ACTIVE(1), ACKNOWLEDGED(2), NOT_REACHED(3), CANCELLED(4), COMPLETED(5), CANCELLED_REFUNDED(6);
 	
 	private int code;
 	private BookingStatus(int id) {
@@ -19,7 +19,7 @@ public enum BookingStatus {
 		case 2 : return ACKNOWLEDGED;
 		case 3 : return NOT_REACHED;
 		case 4 : return CANCELLED;
-		case 5 : return PAID;
+		case 5 : return COMPLETED;
 		case 6 : return CANCELLED_REFUNDED;
 		default : return NA; 
 		}

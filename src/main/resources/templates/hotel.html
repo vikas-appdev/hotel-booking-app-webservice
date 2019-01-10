@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Hotel Admin | Plus2Rooms</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="/hotelv.html">Plus2Rooms</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <!-- Notifications -->
+                    <!-- #END# Notifications -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span th:text="${name}"> Name </span></div>
+                    <div class="email"><span th:text="${email}"> Email </span></div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    
+                    <li class="active">
+                        <a href="/hotelv.html">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/addroom">
+                            <i class="material-icons">text_fields</i>
+                            <span>Add Room</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/allbooking.html">
+                            <i class="material-icons">home</i>
+                            <span>All Bookings</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; 2018 - 2019 <a href="javascript:void(0);">Plus2Rooms</a>.
+                </div>
+                <div class="version">
+                    <b>Version: </b> 1.0.5
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+      </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Example -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Hotel Details
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <a class="btn bg-pink waves-effect m-b-15" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+                               aria-controls="collapseExample">
+                                Hotel Details
+                            </a>
+                            <div class="collapse" id="collapseExample">
+                                <!-- Task Info -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Contact Person</th>
+                                            <th>Email</th>
+                                            <th>Phone1</th>
+                                            <th>Phone2</th>
+                                            <th>Locality</th>
+                                            <th>Terms</th>
+                                            <th>Rating</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr th:if="${hotels.empty}">
+									            <td colspan="2"> No Hotel Found </td>
+									        </tr>
+									        <tr th:each="hotel : ${hotels}">
+									            <td><span th:text="${hotel.id}"> Id </span></td>
+									            <td><span th:text="${hotel.name}"> Name </span></td>
+									            <td><span th:text="${hotel.contactPerson}"> Contact Person </span></td>
+									            <td><span th:text="${hotel.email}"> Email </span></td>
+									            <td><span th:text="${hotel.phone1}"> Phone1 </span></td>
+									            <td><span th:text="${hotel.phone2}"> Phone2 </span></td>
+									            <td><span th:text="${hotel.locality}"> Locality </span></td>
+									            <td><span th:text="${hotel.terms}"> Terms </span></td>
+									            <td><span th:text="${hotel.rating}"> Rating </span></td>
+									            <td><span th:text="${hotel.status}"> Status </span></td>
+									        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Task Info -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Example -->
+            <div class="block-header">
+                <h2>Rooms Detail</h2>
+            </div>
+            
+
+            
+
+            <div class="row clearfix">
+                <!-- Colorful Panel Items With Icon -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Room Details
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+                                    <div class="panel-group" id="accordion_17" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-col-pink">
+                                            <div class="panel-heading" role="tab" id="headingOne_17">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseOne_17" aria-expanded="false" 
+                                                    aria-controls="collapseOne_17">
+                                                        <i class="material-icons">perm_contact_calendar</i> Room Name - Room Type
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne_17">
+                                                <div class="panel-body">
+                                                
+                                                <!-- Task Info -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card" th:each="hotel : ${hotels}">
+                        <div class="header">
+                            <h2>Rooms @ <span th:text="${hotel.id}">Id</span> : <span th:text="${hotel.name}">Name</span></h2>
+                            
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-hover dashboard-task-infos">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Discount %</th>
+                                            <th>Discount Value</th>
+                                            <th>Discounted Amount</th>
+                                            <th>Discounted Price</th>
+                                            <th>Couple</th>
+                                            <th>Family</th>
+                                            <th>AC</th>
+                                            <th>WIFI</th>
+                                            <th>TV</th>
+                                            <th>24x7</th>
+                                            <th>Geyser</th>
+                                            <th>MiniFridge</th>
+                                            <th>Heater</th>
+                                            <th>Parking</th>
+                                            <th>LivingRoom</th>
+                                            <th>Restaurant</th>
+                                            <th>Dining</th>
+                                            <th>CCTV</th>
+                                            <th>cBreakfast</th>
+                                            <th>Discount Value</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:if="${hotels.empty}">
+									            <td colspan="2"> No Hotel Found </td>
+									        </tr>
+									        <tr th:each="room : ${hotel.rooms}">
+									            <td><span th:text="${room.name}"> Name </span></td>
+									            <td><span th:text="${room.category}"> Category </span></td>
+									            <td><span th:text="${room.price}"> Price </span></td>
+									            <td><span th:text="${room.discountInPercentage}"> Discount % </span></td>
+									            <td><span th:text="${room.discountValue}"> Discount Value </span></td>
+									            <td><span th:text="${room.discountAmount}"> Discounted Amount </span></td>
+									            <td><span th:text="${room.discountedPrice}"> Discounted Price </span></td>
+									            <td><span th:text="${room.coupleAllowed}"> Couple </span></td>
+									            <td><span th:text="${room.familyAllowed}"> Family </span></td>
+									            <td><span th:text="${room.ac}"> AC </span></td>
+									            <td><span th:text="${room.wifi}"> WIFI </span></td>
+									            <td><span th:text="${room.tv}"> TV </span></td>
+									            <td><span th:text="${room.service24x7}"> 24x7 </span></td>
+									            <td><span th:text="${room.geyser}"> Geyser </span></td>
+									            <td><span th:text="${room.miniFridge}"> MiniFridge </span></td>
+									            <td><span th:text="${room.heater}"> Heater </span></td>
+									            <td><span th:text="${room.parking}"> Parking </span></td>
+									            <td><span th:text="${room.livingRoom}"> LivingRoom </span></td>
+									            <td><span th:text="${room.restaurant}"> Restaurant </span></td>
+									            <td><span th:text="${room.dining}"> Dining </span></td>
+									            <td><span th:text="${room.cctv}"> CCTV </span></td>
+									            <td><span th:text="${room.complementaryBreakfast}"> cBreakfast </span></td>
+									            <td><span th:text="${room.discountValue}"> Discount Value </span></td>
+									            
+									            
+									        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Task Info -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="panel panel-col-cyan">
+                                            <div class="panel-heading" role="tab" id="headingTwo_17">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseTwo_17" aria-expanded="false"
+                                                       aria-controls="collapseTwo_17">
+                                                        <i class="material-icons">cloud_download</i> Room Name - Room Type
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseTwo_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_17">
+                                                <div class="panel-body">
+                                                   test
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="panel panel-col-teal">
+                                            <div class="panel-heading" role="tab" id="headingThree_17">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseThree_17" aria-expanded="false"
+                                                       aria-controls="collapseThree_17">
+                                                        <i class="material-icons">contact_phone</i> Room Name - Room Type
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseThree_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_17">
+                                                <div class="panel-body">
+                                                    test
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="panel panel-col-orange">
+                                            <div class="panel-heading" role="tab" id="headingFour_17">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_17" href="#collapseFour_17" aria-expanded="false"
+                                                       aria-controls="collapseFour_17">
+                                                        <i class="material-icons">folder_shared</i> Room Name - Room Type
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseFour_17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour_17">
+                                                <div class="panel-body">
+                                                    test
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Colorful Panel Items With Icon -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="/plugins/node-waves/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="/js/admin.js"></script>
+
+    <!-- Demo Js -->
+    <script src="/js/demo.js"></script>
+</body>
+
+</html>

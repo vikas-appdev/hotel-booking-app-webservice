@@ -3,6 +3,7 @@ package com.sdigitizers.hotel.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,18 +54,41 @@ public class HotelController {
 		return userRepository.findAll();
 	}
 	
-	@PostMapping("hotels")
+	@GetMapping("hotels/bycity/{city}")
+	public List<Hotel> findHotelsByCity(@PathVariable String city){
+		
+		Random rand = new Random();
+		
+		switch (rand.nextInt(6)) {
+		case 0:
+			return hotelRepository.findByCityByOrderByIdAsc(city);
+		case 1:
+			return hotelRepository.findByCityByOrderByIdDesc(city);
+		case 2:
+			return hotelRepository.findByCityByOrderByNameAsc(city);
+		case 3:
+			return hotelRepository.findByCityByOrderByNameDesc(city);
+		case 4:
+			return hotelRepository.findByCityByOrderByCityDesc(city);
+		case 5:
+			return hotelRepository.findByCityByOrderByCityAsc(city);
+		default:
+			return hotelRepository.findByCity(city);
+		}
+		
+	}
 	
-	public ResponseEntity<Object> createHotel(@RequestBody Hotel hotel) {
-		Hotel savedHotel = hotelRepository.save(hotel);
+	@PostMapping("hotel")
+	public Hotel createHotel(@RequestBody Hotel hotel) {
+		return hotelRepository.save(hotel);
 		
 		
-		URI location = ServletUriComponentsBuilder
+		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
 		.path("/{id}")
-		.buildAndExpand(savedHotel.getId()).toUri();
+		.buildAndExpand(savedHotel.getId()).toUri();*/
 		
-		return ResponseEntity.created(location).build();
+		//return ResponseEntity.created(location).build();
 		
 	}
 	

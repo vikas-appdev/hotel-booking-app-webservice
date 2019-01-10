@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -17,6 +18,7 @@ import com.sdigitizers.hotel.codec.TransactionType;
 @Entity
 public class Transaction {
 	@Id
+	@GeneratedValue
 	private Long id;
 	@OneToOne
 	private Booking booking;

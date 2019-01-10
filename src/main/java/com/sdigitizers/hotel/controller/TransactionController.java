@@ -16,10 +16,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.UserNotFoundException;
 import com.sdigitizers.hotel.codec.BookingStatus;
+import com.sdigitizers.hotel.codec.PaymentStatus;
 import com.sdigitizers.hotel.model.Booking;
 import com.sdigitizers.hotel.model.Hotel;
+import com.sdigitizers.hotel.model.Room;
 import com.sdigitizers.hotel.model.Transaction;
 import com.sdigitizers.hotel.model.User;
+import com.sdigitizers.hotel.repository.BookingRepository;
 import com.sdigitizers.hotel.repository.HotelRepository;
 import com.sdigitizers.hotel.repository.TransactionRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
@@ -29,6 +32,8 @@ public class TransactionController {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
+	@Autowired
+	private BookingRepository bookingRepository;
 	
 
 	@GetMapping("transaction")
@@ -37,16 +42,15 @@ public class TransactionController {
 	}
 	
 	@PostMapping("transactions")
-	public ResponseEntity<Object> createHotel(@RequestBody Transaction transaction) {
+	public long createHotel(@RequestBody Transaction transaction) {
 		Transaction savedTransaction = transactionRepository.save(transaction);
 		
-		
-		URI location = ServletUriComponentsBuilder
-		.fromCurrentRequest()
-		.path("/{id}")
-		.buildAndExpand(savedTransaction.getId()).toUri();
-		
-		return ResponseEntity.created(location).build();
+		Booking booking2 = savedTransaction.getBooking();
+		booking2.setPaymentStatus(PaymentStatus.PAID);
+		bookingRepository.save(booking2);
+		System.out.println(savedTransaction.getId());
+		//Long id = savedTransaction.getId();
+		return savedTransaction.getId();
 		
 	}
 	@PutMapping("transaction/{id}")

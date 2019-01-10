@@ -50,21 +50,35 @@ insert into admin(id, email, password) values(1001, 'test@test.com', 'test');
 insert into fab_room(id, room_id, user_id) values(1222, 11001, 111);
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(1,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_airport.jpg','19.2565','20.2535','airport');
+(1,'nearby','http://45.120.149.244/ic_nearby.xml','19','20','Nearby');
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(2,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_isbt.jpg','19.2565','20.2535','isbt');
+(2,'airport','http://45.120.149.244/guwahati_airport.jpg','26.106714','91.586594','Airport');
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(3,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_jalukbari.jpg','19','19','jalukbari');
+(3,'airport','http://45.120.149.244/guwahati_isbt.jpg','26.115717','91.721580','Isbt');
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(4,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_khanapara.jpg','19','19','khanapara');
+(4,'airport','http://45.120.149.244/guwahati_jalukbari.jpg','26.147427','91.654702','Jalukbari');
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(5,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_paltan_bazar.jpg','19','19','paltanbazar');
+(5,'airport','http://45.120.149.244/guwahati_khanapara.jpg','26.124648','91.815694','Khanapara');
 
 insert into location(id, address, image_link, latitude, longitude, name) values
-(6,'airport','https://www.sanatandigitizers.com/thirdparty/hotelapp/guwahati_railway.jpg','19','19','railway');
+(6,'airport','http://45.120.149.244/guwahati_paltan_bazar.jpg','26.179865','91.753788','Paltan Bazar');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(7,'airport','http://45.120.149.244/guwahati_railway.jpg','26.182253','91.748659','Railway Station');
 
 
+insert into location(id, address, image_link, latitude, longitude, name) values
+(8,'beltola','http://45.120.149.244/guwahati_beltola.jpg','26.125826','91.797256','Beltola');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(9,'maligaon','http://45.120.149.244/guwahati_maligaon.jpg','26.150634','91.696277','Maligaon');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(10,'kamakhya','http://45.120.149.244/guwahati_kamakhya.jpg','26.165953','91.704877','Kamakhya');
+
+insert into location(id, address, image_link, latitude, longitude, name) values
+(11,'Jorabat','http://45.120.149.244/guwahati_jorabat.jpg','26.098600','91.876622','Jorabat');

@@ -3,6 +3,7 @@ package com.sdigitizers.hotel.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,8 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sdigitizers.hotel.codec.BookingStatus;
+import com.sdigitizers.hotel.codec.FeedbackStatus;
+import com.sdigitizers.hotel.codec.PaymentStatus;
 
 @Entity
 public class Booking {
@@ -49,26 +52,81 @@ public class Booking {
 	private String email;
 	
 	@OneToOne(mappedBy="booking")
-	private Invoice invoice;
+	private PromocodeTransaction transaction;
 	
 	@OneToOne(mappedBy="booking")
 	private BookingReview bookingReview;
 
 	private String specialNote;
 	private BookingStatus status;
+	
+	//Updated Field
+	private PaymentStatus paymentStatus;
+	@Column(columnDefinition="boolean default 0")
+	private boolean isBusinessTrip;
+	private String GSTIN;
+	private String legalName;
+	private double walletMoneyUsed;
+	private FeedbackStatus feedbackStatus;
+	private double promoCodeAmountUsed;
+	
+	
+	
+	
+	
+	
+	
+	
+	public double getPromoCodeAmountUsed() {
+		return promoCodeAmountUsed;
+	}
+
+
+
+	public void setPromoCodeAmountUsed(double promoCodeAmountUsed) {
+		this.promoCodeAmountUsed = promoCodeAmountUsed;
+	}
+
+
+
+	
+
+
+
+	public PromocodeTransaction getTransaction() {
+		return transaction;
+	}
+
+
+
+	public void setTransaction(PromocodeTransaction transaction) {
+		this.transaction = transaction;
+	}
+
+	
+	
+
+	
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 
 	public String getIdString() {
 		return String.format("%06d", id);
 	}
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	
 	public Room getRoom() {
 		return room;
@@ -78,9 +136,7 @@ public class Booking {
 		this.room = room;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 
 	public User getUser() {
 		return user;
@@ -166,13 +222,7 @@ public class Booking {
 		return price;
 	}
 	
-	public Invoice getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(Invoice invoice) {
-		this.invoice = invoice;
-	}
+	
 	
 	public BookingReview getBookingReview() {
 		return bookingReview;
@@ -192,6 +242,64 @@ public class Booking {
 
 	public double getDiscountedPrice() {
 		return price - discountAmount;
+	}
+
+	public PaymentStatus getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	public boolean isBusinessTrip() {
+		return isBusinessTrip;
+	}
+
+	public void setBusinessTrip(boolean isBusinessTrip) {
+		this.isBusinessTrip = isBusinessTrip;
+	}
+
+	public String getGSTIN() {
+		return GSTIN;
+	}
+
+	public void setGSTIN(String gSTIN) {
+		GSTIN = gSTIN;
+	}
+
+	public String getLegalName() {
+		return legalName;
+	}
+
+	public void setLegalName(String legalName) {
+		this.legalName = legalName;
+	}
+
+	
+
+	public double getWalletMoneyUsed() {
+		return walletMoneyUsed;
+	}
+
+
+
+	public void setWalletMoneyUsed(double walletMoneyUsed) {
+		this.walletMoneyUsed = walletMoneyUsed;
+	}
+
+
+
+	public double getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public FeedbackStatus getFeedbackStatus() {
+		return feedbackStatus;
+	}
+
+	public void setFeedbackStatus(FeedbackStatus feedbackStatus) {
+		this.feedbackStatus = feedbackStatus;
 	}
 	
 	

@@ -35,6 +35,10 @@ public class Hotel {
 	@OneToMany(mappedBy="hotel")
 	private List<HotelImage> images;
 	
+	//Added field
+	private boolean status;
+	
+	
 	
 
 	public Integer getId() {
@@ -192,6 +196,14 @@ public class Hotel {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 	

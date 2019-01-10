@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -19,6 +21,7 @@ public class BookingReview implements Serializable {
 	@OneToOne
 	@JsonIgnore
 	private Booking booking;
+	@CreationTimestamp
 	private LocalDateTime time;
 	private int rating;
 	private String reviewText;

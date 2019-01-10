@@ -13,8 +13,8 @@ public class RoomImage {
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne
 	@JsonIgnore
+	@ManyToOne
 	private Room room;
 	
 	private String url;

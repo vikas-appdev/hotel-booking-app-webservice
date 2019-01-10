@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class FabRoomCompositeKey implements Serializable {
 	
+	private Integer id;
 	private Room room;
 	private User user;
 	public Room getRoom() {
@@ -18,6 +19,11 @@ public class FabRoomCompositeKey implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+	
+	
+
 	
 	
 	@Override

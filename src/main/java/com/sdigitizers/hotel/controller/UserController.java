@@ -1,37 +1,38 @@
 package com.sdigitizers.hotel.controller;
 
-import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sdigitizers.hotel.UserNotFoundException;
-import com.sdigitizers.hotel.codec.BookingStatus;
-import com.sdigitizers.hotel.model.Booking;
-import com.sdigitizers.hotel.model.Hotel;
-import com.sdigitizers.hotel.model.Transaction;
+import com.sdigitizers.hotel.codec.TransactionType;
+import com.sdigitizers.hotel.model.AppConfig;
+import com.sdigitizers.hotel.model.CustomerWalletTxn;
 import com.sdigitizers.hotel.model.User;
+import com.sdigitizers.hotel.repository.AppConfigRepository;
+import com.sdigitizers.hotel.repository.CustomerWalletTxnRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import com.sdigitizers.hotel.utils.RandomString;
 
 @RestController
 public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CustomerWalletTxnRepository cwt;
+	
+	@Autowired
+	private AppConfigRepository appconfig;
 	
 	
 	
@@ -43,6 +44,16 @@ public class UserController {
 		
 		return user;
 		
+	}
+	
+	@GetMapping("users/mobilenumber/{phone}")
+	public boolean findUserByPhone(@PathVariable long phone) {
+		
+		Optional<User> findByPhone = userRepository.findByPhone(phone);
+		if (findByPhone.isPresent()) {
+			return true;
+		}
+		return false;
 	}
 	
 	@GetMapping("/users/by/{id}")
@@ -67,9 +78,63 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
-		return userRepository.save(user);
+	@PostMapping("/users/{refcode}")
+	public User createUser(@RequestBody User user, @PathVariable String refcode) {
+		//boolean present = false;
+		double amount = 0.0;
+		List<AppConfig> findAll = appconfig.findAll();
+		for (AppConfig appConfig : findAll) {
+			if (appConfig.getType().equals("referral_bonus_amount")) {
+				amount = Double.parseDouble(appConfig.getDescription());
+			}
+		}
+		
+		
+		String randomAlphaNumeric = RandomString.randomAlphaNumeric(6);
+		user.setReferralCode(randomAlphaNumeric);
+		User save = userRepository.save(user);
+		
+		
+		if(refcode!=null) {
+			User user2 = userRepository.findByReferralCode(refcode);
+			CustomerWalletTxn txn = new CustomerWalletTxn();
+			txn.setAmount(amount);
+			txn.setDate(LocalDate.now());
+			txn.setRemarks("remarks");
+			txn.setTxnRef("reference");
+			txn.setTxnType(TransactionType.CREDIT);
+			txn.setUser(user2);
+			cwt.save(txn);
+			double userWalletBalance = user2.getWalletBalance()+amount;
+			user2.setWalletBalance(userWalletBalance);
+			userRepository.save(user2);
+			
+			
+			CustomerWalletTxn txn2 = new CustomerWalletTxn();
+			txn2.setAmount(amount);
+			txn2.setDate(LocalDate.now());
+			txn2.setRemarks("Referral Bonus");
+			txn2.setTxnRef(refcode);
+			txn2.setTxnType(TransactionType.CREDIT);
+			txn2.setUser(save);
+			cwt.save(txn2);
+			save.setWalletBalance(amount);
+			return userRepository.save(save);
+			
+		}
+//		List<User> findAll = userRepository.findAll();
+//		for (User user2 : findAll) {
+//			if (user2.getReferralCode().equals(randomAlphaNumeric)) {
+//				present = true;
+//			}
+//		}
+//		
+//		if(present==false) {
+//			user.setReferralCode(randomAlphaNumeric);
+//		}
+		
+//		user.setReferralCode(randomAlphaNumeric);
+		return save;
 		
 		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
@@ -78,6 +143,11 @@ public class UserController {
 		
 		return ResponseEntity.created(location).build();*/
 		
+	}
+	
+	public String check(String random) {
+		
+		return null;
 	}
 	
 	@PutMapping("/users/{id}")

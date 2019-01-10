@@ -51,7 +51,25 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<FabRoom> fabroom;
 	
+	//Updated Field
+	private double walletBalance;
+	@Column(columnDefinition="CHAR(6)", length=6)
+	private String referralCode;
+	@OneToMany(mappedBy="user")
+	private List<CustomerWalletTxn> customerWalletTxn;
+	
+	@OneToMany(mappedBy="user")
+	private List<PromocodeTransaction> promoCodeTransactions;
+	
+	
+	
+	public List<PromocodeTransaction> getTransactions() {
+		return promoCodeTransactions;
+	}
 
+	public void setTransactions(List<PromocodeTransaction> transactions) {
+		this.promoCodeTransactions = transactions;
+	}
 
 	public List<FabRoom> getFabroom() {
 		return fabroom;
@@ -169,6 +187,31 @@ public class User {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public double getWalletBalance() {
+		return walletBalance;
+	}
+
+	public void setWalletBalance(double walletBalance) {
+		this.walletBalance = walletBalance;
+	}
+
+	public String getReferralCode() {
+		return referralCode;
+	}
+
+	public void setReferralCode(String referralCode) {
+		this.referralCode = referralCode;
+	}
+
+	
+	public List<CustomerWalletTxn> getCustomerWalletTxn() {
+		return customerWalletTxn;
+	}
+
+	public void setCustomerWalletTxn(List<CustomerWalletTxn> customerWalletTxn) {
+		this.customerWalletTxn = customerWalletTxn;
 	}
 
 }

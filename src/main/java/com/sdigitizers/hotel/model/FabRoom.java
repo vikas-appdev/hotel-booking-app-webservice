@@ -8,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
+@SuppressWarnings("serial")
 @Entity
-@IdClass(FabRoomCompositeKey.class)
+//@IdClass(FabRoomCompositeKey.class)
 public class FabRoom implements Serializable {
 
 	@GeneratedValue
@@ -18,7 +19,7 @@ public class FabRoom implements Serializable {
 	
 	@ManyToOne
 	private Room room;
-	@Id
+	//@Id
 	@ManyToOne
 	private User user;
 	
