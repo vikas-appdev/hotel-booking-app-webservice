@@ -1,5 +1,6 @@
 package com.sdigitizers.hotel.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Hotel {
@@ -29,6 +32,30 @@ public class Hotel {
 	private double rating;
 	@Embedded
 	private Address address;
+	@Embedded
+	private BankDetails bankDetails;
+	
+	@Column(columnDefinition="tinyint(1) default 0")
+	private boolean paymentPreference;
+	
+	
+	
+	public boolean isPaymentPreference() {
+		return paymentPreference;
+	}
+
+	public void setPaymentPreference(boolean paymentPreference) {
+		this.paymentPreference = paymentPreference;
+	}
+
+	public BankDetails getBankDetails() {
+		return bankDetails;
+	}
+
+	public void setBankDetails(BankDetails bankDetails) {
+		this.bankDetails = bankDetails;
+	}
+
 	private String description;
 	@OneToMany(mappedBy = "hotel")
 	private List<Room> rooms;
@@ -38,8 +65,17 @@ public class Hotel {
 	//Added field
 	private boolean status;
 	
+	@CreationTimestamp
+	private LocalDateTime hotelCreation;
 	
-	
+
+	public LocalDateTime getHotelCreation() {
+		return hotelCreation;
+	}
+
+	public void setHotelCreation(LocalDateTime hotelCreation) {
+		this.hotelCreation = hotelCreation;
+	}
 
 	public Integer getId() {
 		return id;

@@ -27,42 +27,51 @@ import com.sdigitizers.hotel.codec.PaymentStatus;
 public class Booking {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
-	@SequenceGenerator(initialValue=100000, name = "seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+	@SequenceGenerator(initialValue = 100000, name = "seq")
 	private Integer id;
-	
+
 	@ManyToOne
 	private Room room;
+	@JsonIgnore
+	@OneToOne(mappedBy = "booking")
+	private ReportIssue issue;
+
 	
-	
+
 	@ManyToOne
 	private User user;
-	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	// @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
 	private LocalDateTime time;
-	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	// @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime fromTime;
-	//@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	// @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime uptoTime;
+	private LocalDateTime checkinTime;
+	private LocalDateTime checkoutTime;
+
+	
+
 	private String bookedFor;
 	private String countryCode;
 	private double price;
 	private double discountAmount;
 	private long phone;
 	private String email;
-	
-	@OneToOne(mappedBy="booking")
+
+	@OneToOne(mappedBy = "booking")
 	private PromocodeTransaction transaction;
-	
-	@OneToOne(mappedBy="booking")
+
+	@OneToOne(mappedBy = "booking")
 	private BookingReview bookingReview;
 
 	private String specialNote;
 	private BookingStatus status;
-	
-	//Updated Field
+
+	// Updated Field
 	private PaymentStatus paymentStatus;
-	@Column(columnDefinition="boolean default 0")
+	@Column(columnDefinition = "boolean default 0")
 	private boolean isBusinessTrip;
 	private String GSTIN;
 	private String legalName;
@@ -70,73 +79,77 @@ public class Booking {
 	private FeedbackStatus feedbackStatus;
 	private double promoCodeAmountUsed;
 	
-	
-	
-	
-	
-	
-	
-	
+	public ReportIssue getIssue() {
+		return issue;
+	}
+
+	public void setIssue(ReportIssue issue) {
+		this.issue = issue;
+	}
+
 	public double getPromoCodeAmountUsed() {
 		return promoCodeAmountUsed;
 	}
-
-
 
 	public void setPromoCodeAmountUsed(double promoCodeAmountUsed) {
 		this.promoCodeAmountUsed = promoCodeAmountUsed;
 	}
 
-
-
-	
-
-
-
 	public PromocodeTransaction getTransaction() {
 		return transaction;
 	}
-
-
 
 	public void setTransaction(PromocodeTransaction transaction) {
 		this.transaction = transaction;
 	}
 
-	
-	
-
-	
-
-
-
 	public Integer getId() {
 		return id;
 	}
+	
+	public LocalDateTime getCheckinTime() {
+		return checkinTime;
+	}
 
+	public void setCheckinTime(LocalDateTime checkinTime) {
+		this.checkinTime = checkinTime;
+	}
 
+	public LocalDateTime getCheckoutTime() {
+		return checkoutTime;
+	}
+
+	public void setCheckoutTime(LocalDateTime checkoutTime) {
+		this.checkoutTime = checkoutTime;
+	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
 	public String getIdString() {
 		return String.format("%06d", id);
 	}
-	
-	
-	
+
 	public Room getRoom() {
 		return room;
+	}
+	
+	public String getLatitude() {
+		return room.getHotel().getAddress().getLatitude();
+	}
+	
+	public String getLongitude() {
+		return room.getHotel().getAddress().getLongitude();
+	}
+	
+	public long getPhone1() {
+		return room.getHotel().getPhone1();
 	}
 
 	public void setRoom(Room room) {
 		this.room = room;
 	}
-
-	
 
 	public User getUser() {
 		return user;
@@ -221,9 +234,7 @@ public class Booking {
 	public double getPrice() {
 		return price;
 	}
-	
-	
-	
+
 	public BookingReview getBookingReview() {
 		return bookingReview;
 	}
@@ -276,19 +287,13 @@ public class Booking {
 		this.legalName = legalName;
 	}
 
-	
-
 	public double getWalletMoneyUsed() {
 		return walletMoneyUsed;
 	}
 
-
-
 	public void setWalletMoneyUsed(double walletMoneyUsed) {
 		this.walletMoneyUsed = walletMoneyUsed;
 	}
-
-
 
 	public double getDiscountAmount() {
 		return discountAmount;
@@ -301,6 +306,5 @@ public class Booking {
 	public void setFeedbackStatus(FeedbackStatus feedbackStatus) {
 		this.feedbackStatus = feedbackStatus;
 	}
-	
-	
+
 }

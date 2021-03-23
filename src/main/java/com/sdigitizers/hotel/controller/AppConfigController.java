@@ -2,6 +2,7 @@ package com.sdigitizers.hotel.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +32,18 @@ public class AppConfigController {
 	
 	@PostMapping("/appconfig")
 	public AppConfig saveAppConfig(@RequestBody AppConfig appConfig) {
+		
+		Optional<AppConfig> optional = appConfigRepository.findByType(appConfig.getType());
+		if (optional.isPresent()) {
+			AppConfig config = optional.get();
+			appConfig.setId(config.getId());
+		}
+		
 		return appConfigRepository.save(appConfig);
 	}
+	
+	//check type and then update
+	
 	
 	
 }

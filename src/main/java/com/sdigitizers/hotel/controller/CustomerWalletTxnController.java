@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sdigitizers.hotel.codec.TransactionType;
+import com.sdigitizers.hotel.model.AppConfig;
 import com.sdigitizers.hotel.model.CustomerWalletTxn;
 import com.sdigitizers.hotel.model.User;
+import com.sdigitizers.hotel.repository.AppConfigRepository;
 import com.sdigitizers.hotel.repository.CustomerWalletTxnRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
 
@@ -23,9 +25,14 @@ public class CustomerWalletTxnController {
 	private CustomerWalletTxnRepository walletTxnRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private AppConfigRepository appConfigRepository;
 	
 	@PostMapping("/wallettxn/{userid}")
 	public User add(@RequestBody CustomerWalletTxn txn, @PathVariable int userid) {
+		
+		
+		
 		Optional<User> findById = userRepository.findById(userid);
 		User user2 = findById.get();
 		txn.setUser(user2);
@@ -48,6 +55,8 @@ public class CustomerWalletTxnController {
 	public void delete(@PathVariable int id) {
 		walletTxnRepository.deleteById(id);
 	}
+	
+	
 	
 	
 

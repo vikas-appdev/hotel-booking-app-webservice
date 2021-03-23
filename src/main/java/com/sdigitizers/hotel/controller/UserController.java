@@ -89,39 +89,44 @@ public class UserController {
 			}
 		}
 		
-		
-		String randomAlphaNumeric = RandomString.randomAlphaNumeric(6);
-		user.setReferralCode(randomAlphaNumeric);
-		User save = userRepository.save(user);
-		
-		
-		if(refcode!=null) {
-			User user2 = userRepository.findByReferralCode(refcode);
-			CustomerWalletTxn txn = new CustomerWalletTxn();
-			txn.setAmount(amount);
-			txn.setDate(LocalDate.now());
-			txn.setRemarks("remarks");
-			txn.setTxnRef("reference");
-			txn.setTxnType(TransactionType.CREDIT);
-			txn.setUser(user2);
-			cwt.save(txn);
-			double userWalletBalance = user2.getWalletBalance()+amount;
-			user2.setWalletBalance(userWalletBalance);
-			userRepository.save(user2);
-			
-			
-			CustomerWalletTxn txn2 = new CustomerWalletTxn();
-			txn2.setAmount(amount);
-			txn2.setDate(LocalDate.now());
-			txn2.setRemarks("Referral Bonus");
-			txn2.setTxnRef(refcode);
-			txn2.setTxnType(TransactionType.CREDIT);
-			txn2.setUser(save);
-			cwt.save(txn2);
-			save.setWalletBalance(amount);
-			return userRepository.save(save);
-			
+		if(!refcode.equals("nocode")) {
+			Optional<User> user2 = userRepository.findByReferralCode(refcode);
+			if(user2.isPresent()) {
+				
+				user.setReferralCode(RandomString.randomAlphaNumeric(6));
+				User save = userRepository.save(user);
+				
+				CustomerWalletTxn txn = new CustomerWalletTxn();
+				txn.setAmount(amount);
+				txn.setDate(LocalDate.now());
+				txn.setRemarks("Refferal Bonus against user : "+save.getEmail());
+				txn.setTxnRef("Refferal Bonus");
+				txn.setTxnType(TransactionType.CREDIT);
+				txn.setUser(user2.get());
+				cwt.save(txn);
+				double userWalletBalance = user2.get().getWalletBalance()+amount;
+				user2.get().setWalletBalance(userWalletBalance);
+				userRepository.save(user2.get());
+				
+				
+				CustomerWalletTxn txn2 = new CustomerWalletTxn();
+				txn2.setAmount(amount);
+				txn2.setDate(LocalDate.now());
+				txn2.setRemarks("Referral Bonus from user : "+user2.get().getEmail());
+				txn2.setTxnRef(refcode);
+				txn2.setTxnType(TransactionType.CREDIT);
+				txn2.setUser(save);
+				cwt.save(txn2);
+				save.setWalletBalance(amount);
+				return userRepository.save(save);
+				
+			}else {
+				throw new UserNotFoundException("Invalid referral code");
+			}
 		}
+		user.setReferralCode(RandomString.randomAlphaNumeric(6));
+		User save = userRepository.save(user);
+		return save;	
 //		List<User> findAll = userRepository.findAll();
 //		for (User user2 : findAll) {
 //			if (user2.getReferralCode().equals(randomAlphaNumeric)) {
@@ -134,7 +139,7 @@ public class UserController {
 //		}
 		
 //		user.setReferralCode(randomAlphaNumeric);
-		return save;
+		
 		
 		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()

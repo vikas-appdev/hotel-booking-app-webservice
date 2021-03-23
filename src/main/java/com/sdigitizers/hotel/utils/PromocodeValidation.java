@@ -3,6 +3,7 @@ package com.sdigitizers.hotel.utils;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,9 @@ public class PromocodeValidation {
 	PromoCodeTransactionRepository codeTransactionRepository;
 
 	public boolean validatePromoCode(String code, User user) {
-		PromoCode promoCode = codeRepository.findByCode(code);
+		
+		Optional<PromoCode> findByCode = codeRepository.findByCode(code);
+		PromoCode promoCode = findByCode.get();
 		if (validateDate(promoCode.getValidFrom(), promoCode.getValidTill())) {
 			if (validateTime(promoCode.getTimeStart(), promoCode.getTimeEnd())) {
 				if (validateMaxNoTimesUsed(promoCode, user)) {

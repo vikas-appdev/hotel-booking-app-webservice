@@ -23,10 +23,10 @@ public class FileController {
     public UploadFileResponse uploadFile(@RequestParam MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
-        String fileDownloadUri = ServletUriComponentsBuilder
-        		//.fromPath("https://www.sanatandigitizers.com")
-        		.fromCurrentContextPath()
-                .path("/uploads/")
+        String fileDownloadUri = ServletUriComponentsBuilder.fromHttpUrl("http://45.120.149.244")
+        		//.fromPath("45.120.149.244")
+        		//.fromCurrentContextPath()
+                
                 .path(fileName)
                 .toUriString();
 

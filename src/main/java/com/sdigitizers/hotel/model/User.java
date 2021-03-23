@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -61,8 +62,31 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<PromocodeTransaction> promoCodeTransactions;
 	
+	@OneToOne(mappedBy="user")
+	private Agent agent;
+	
+	private int userType;
 	
 	
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	
+
 	public List<PromocodeTransaction> getTransactions() {
 		return promoCodeTransactions;
 	}

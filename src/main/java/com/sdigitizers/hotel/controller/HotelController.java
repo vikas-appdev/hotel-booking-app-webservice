@@ -1,12 +1,10 @@
 package com.sdigitizers.hotel.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +20,6 @@ import com.sdigitizers.hotel.fileupload.FileStorageService;
 import com.sdigitizers.hotel.fileupload.UploadFileResponse;
 import com.sdigitizers.hotel.model.Hotel;
 import com.sdigitizers.hotel.model.HotelImage;
-import com.sdigitizers.hotel.model.Room;
-import com.sdigitizers.hotel.model.RoomImage;
 import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.HotelImageRepository;
 import com.sdigitizers.hotel.repository.HotelRepository;
@@ -54,6 +50,18 @@ public class HotelController {
 		return userRepository.findAll();
 	}
 	
+	@GetMapping("/hotels/email/{email}")
+	public Hotel retriveHotelByEmail(@PathVariable String email) {
+		Optional<Hotel> hotel = hotelRepository.findByEmail(email);
+		if(!hotel.isPresent())
+			throw new UserNotFoundException("id- "+email);
+		
+		Hotel hotel2 = hotel.get();
+		
+		return hotel2;
+		
+	}
+	
 	@GetMapping("hotels/bycity/{city}")
 	public List<Hotel> findHotelsByCity(@PathVariable String city){
 		
@@ -61,19 +69,19 @@ public class HotelController {
 		
 		switch (rand.nextInt(6)) {
 		case 0:
-			return hotelRepository.findByCityByOrderByIdAsc(city);
+			return hotelRepository.findByAddressCityByOrderByIdAsc(city);
 		case 1:
-			return hotelRepository.findByCityByOrderByIdDesc(city);
+			return hotelRepository.findByAddressCityByOrderByIdDesc(city);
 		case 2:
-			return hotelRepository.findByCityByOrderByNameAsc(city);
+			return hotelRepository.findByAddressCityByOrderByNameAsc(city);
 		case 3:
-			return hotelRepository.findByCityByOrderByNameDesc(city);
+			return hotelRepository.findByAddressCityByOrderByNameDesc(city);
 		case 4:
-			return hotelRepository.findByCityByOrderByCityDesc(city);
+			return hotelRepository.findByAddressCityByOrderByCityDesc(city);
 		case 5:
-			return hotelRepository.findByCityByOrderByCityAsc(city);
+			return hotelRepository.findByAddressCityByOrderByCityAsc(city);
 		default:
-			return hotelRepository.findByCity(city);
+			return hotelRepository.findByAddressCity(city);
 		}
 		
 	}

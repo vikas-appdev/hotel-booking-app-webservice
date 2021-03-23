@@ -1,5 +1,6 @@
 package com.sdigitizers.hotel.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,12 +16,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sdigitizers.hotel.UserNotFoundException;
+import com.sdigitizers.hotel.codec.BookingStatus;
+import com.sdigitizers.hotel.codec.FeedbackStatus;
+import com.sdigitizers.hotel.codec.PaymentStatus;
+import com.sdigitizers.hotel.codec.TransactionType;
 import com.sdigitizers.hotel.exception.NotFounWalaException;
 import com.sdigitizers.hotel.model.Booking;
+import com.sdigitizers.hotel.model.BookingReview;
+import com.sdigitizers.hotel.model.CustomerWalletTxn;
 import com.sdigitizers.hotel.model.Hotel;
 import com.sdigitizers.hotel.model.Room;
 import com.sdigitizers.hotel.model.User;
 import com.sdigitizers.hotel.repository.BookingRepository;
+import com.sdigitizers.hotel.repository.CustomerWalletTxnRepository;
 import com.sdigitizers.hotel.repository.UserRepository;
 
 @RestController
@@ -31,6 +39,9 @@ public class BookingController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CustomerWalletTxnRepository customerWalletTxn;
 	
 	
 	@GetMapping("booking")
@@ -98,10 +109,75 @@ public class BookingController {
 	@PostMapping("booking")
 	public Booking createBooking(@RequestBody Booking booking) {
 		//int hotelId = booking.getRoom().getHotelId();
+		Booking save = bookingRepository.save(booking);
 		
 		//booking.setHotelId(hotelId);
+		double walletMoneyUsed = booking.getWalletMoneyUsed();
+		User user = booking.getUser();
 		
-		return bookingRepository.save(booking);
+		
+		if (walletMoneyUsed!=0) {
+			CustomerWalletTxn txn = new CustomerWalletTxn();
+			txn.setAmount(walletMoneyUsed);
+			txn.setDate(LocalDate.now());
+			txn.setRemarks("Room Booking");
+			txn.setTxnRef(""+save.getId());
+			txn.setTxnType(TransactionType.DEBIT);
+			double walletBalance = user.getWalletBalance()-walletMoneyUsed;
+			user.setWalletBalance(walletBalance);
+			customerWalletTxn.save(txn);
+			userRepository.save(user);
+		}
+		
+		return save;
+		
+		/*URI location = ServletUriComponentsBuilder
+		.fromCurrentRequest()
+		.path("/{id}")
+		.buildAndExpand(savedBooking.getId()).toUri();
+		
+		return ResponseEntity.created(location).build();*/
+		
+	}
+	
+	@PostMapping("booking/offline/{from}/{upto}")
+	public void createOfflineBooking(@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime from,
+			@PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime upto,
+			@RequestBody Room room) {
+		
+		Booking booking = new Booking();
+		
+		Optional<User> userOptional = userRepository.findById(404);
+		User user = userOptional.get();
+		
+		
+		booking.setBookedFor("Offline User");
+		booking.setBusinessTrip(false);
+		booking.setCheckinTime(from);//Take from user
+		booking.setCheckoutTime(upto);//take from user
+		booking.setCountryCode("91");
+		booking.setDiscountAmount(0.0);
+		booking.setEmail(user.getEmail());
+		booking.setFeedbackStatus(FeedbackStatus.NA);
+		booking.setFromTime(LocalDateTime.now());//take from user
+		booking.setGSTIN("NA");
+		booking.setPaymentStatus(PaymentStatus.PAID);
+		booking.setPhone(91L);
+		booking.setPrice(0.0);
+		booking.setPromoCodeAmountUsed(0.0);
+		booking.setRoom(room);
+		booking.setSpecialNote("offline booking");
+		booking.setStatus(BookingStatus.ACKNOWLEDGED);
+		booking.setTime(LocalDateTime.now());
+		booking.setUptoTime(upto);//from user
+		booking.setUser(user);
+		
+		
+		//int hotelId = booking.getRoom().getHotelId();
+		Booking save = bookingRepository.save(booking);
+		
+		
+		
 		
 		/*URI location = ServletUriComponentsBuilder
 		.fromCurrentRequest()
@@ -127,6 +203,26 @@ public class BookingController {
 		return bookingRepository.save(booking);
 		
 		
+	}
+	
+	@GetMapping("booking/hotel/{hotelid}/p")
+	public List<Booking> getPastBookingByHotelId(@PathVariable int hotelid){
+		return bookingRepository.findPastBookingsForHotel(hotelid, LocalDateTime.now());
+	}
+	
+	@GetMapping("booking/hotel/{hotelid}/c")
+	public List<Booking> getCommingBookingByHotelId(@PathVariable int hotelid){
+		return bookingRepository.findUpcomingBookingsForHotel(hotelid, LocalDateTime.now());
+	}
+	
+	@GetMapping("booking/hotel/{hotelid}/all")
+	public List<Booking> getAllBookingByHotelId(@PathVariable int hotelid){
+		return bookingRepository.findAllBookingsForHotel(hotelid);
+	}
+	
+	@GetMapping("booking/hotel/{hotelid}/all/{date}")
+	public List<Booking> getAllBookingByHotelIdForSingleDate(@PathVariable int hotelid, @PathVariable @DateTimeFormat(iso=ISO.DATE_TIME) LocalDateTime date){
+		return bookingRepository.findUpcomingBookingsForHotelBySingleDate(hotelid, date);
 	}
 	
 	

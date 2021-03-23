@@ -2,25 +2,42 @@ package com.sdigitizers.hotel.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.sdigitizers.hotel.model.Address;
 import com.sdigitizers.hotel.model.Hotel;
+import com.sdigitizers.hotel.model.User;
 
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 	
-	public List<Hotel> findByCity(String city);
+	Optional<Hotel> findByEmail(String email);
 	
-	public List<Hotel> findByCityByOrderByIdAsc(String city);
-	public List<Hotel> findByCityByOrderByIdDesc(String city);
 	
-	public List<Hotel> findByCityByOrderByNameAsc(String city);
-	public List<Hotel> findByCityByOrderByNameDesc(String city);
+	@Query(value="select * from hotel where city=:city", nativeQuery=true)
+	public List<Hotel> findByAddressCity(@Param("city") String city);
 	
-	public List<Hotel> findByCityByOrderByCityAsc(String city);
-	public List<Hotel> findByCityByOrderByCityDesc(String city);
+	@Query(value="select * from hotel where city=:city order by id asc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByIdAsc(@Param("city") String city);
+	
+	@Query(value="select * from hotel where city=:city order by id desc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByIdDesc(@Param("city") String city);
+	
+	@Query(value="select * from hotel where city=:city order by name asc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByNameAsc(@Param("city") String city);
+	
+	@Query(value="select * from hotel where city=:city order by name desc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByNameDesc(@Param("city") String city);
+	
+	@Query(value="select * from hotel where city=:city order by city asc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByCityAsc(@Param("city") String city);
+	
+	@Query(value="select * from hotel where city=:city order by city desc", nativeQuery=true)
+	public List<Hotel> findByAddressCityByOrderByCityDesc(@Param("city") String city);
+	
 	
 	/*
 	static final String HAVERSINE_PART = "(6371 * acos(cos(radians(:latitude)) * cos(radians(m.latitude)) "

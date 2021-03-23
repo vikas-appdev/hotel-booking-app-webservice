@@ -65,9 +65,58 @@ public class Room {
 	private boolean dining;
 	private boolean cctv;
 	private boolean complementaryBreakfast;
+	private boolean bar;
+	private boolean swimmingPool;
+	
+	private double dealPrice;
+	private double tariffPrice;
+	
+	private double ratingSum;
+	private double ratingFactor;
+	
+	
+	
+	
 	
 	
 
+	
+	public boolean isBar() {
+		return bar;
+	}
+	public void setBar(boolean bar) {
+		this.bar = bar;
+	}
+	public boolean isSwimmingPool() {
+		return swimmingPool;
+	}
+	public void setSwimmingPool(boolean swimmingPool) {
+		this.swimmingPool = swimmingPool;
+	}
+	public double getRatingSum() {
+		return ratingSum;
+	}
+	public void setRatingSum(double ratingSum) {
+		this.ratingSum = ratingSum;
+	}
+	public double getRatingFactor() {
+		return ratingFactor;
+	}
+	public void setRatingFactor(double ratingFactor) {
+		this.ratingFactor = ratingFactor;
+	}
+	public double getTariffPrice() {
+		return tariffPrice;
+	}
+	public void setTariffPrice(double tariffPrice) {
+		this.tariffPrice = tariffPrice;
+	}
+	public double getDealPrice() {
+		return dealPrice;
+	}
+	public void setDealPrice(double dealPrice) {
+		this.dealPrice = dealPrice;
+	}
 	public Room() { }
 	public Room(int id) { this.id = id; }
 	
@@ -146,7 +195,7 @@ public class Room {
 	}
 	
 	public boolean isDiscountInPercentage() {
-		return discountInPercentage;
+		return false;
 	}
 
 	public void setDicountInPercentage(boolean discountInPercentage) {
@@ -274,12 +323,9 @@ public class Room {
     }
     
     public double getDiscountPercentage() {
-    	return discountInPercentage? discountValue : (discountValue/price)*100;
+    	return discountInPercentage? discountValue : (discountValue/tariffPrice)*100;
     }
     
-    public double getDiscountedPrice() {
-    	return price - getDiscountAmount();
-    }
     
     public List<FabRoom> getFabRoom() {
 		return fabRoom;

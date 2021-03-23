@@ -84,7 +84,7 @@ public class HotelAdmin {
 		String name =  (String) session.getAttribute("name");
 		
 		if (email!=null) {
-			model.addAttribute("hotels", hotelRepository.findAll());
+			model.addAttribute("hotels", hotelRepository.findByEmail(email));
 			model.addAttribute("email", email);
 			model.addAttribute("name", name);
 			return "hotel";
@@ -99,7 +99,7 @@ public class HotelAdmin {
 		String name =  (String) session.getAttribute("name");
 		
 		if (email!=null) {
-			model.addAttribute("hotels", hotelRepository.findAll());
+			model.addAttribute("hotels", hotelRepository.findByEmail(email));
 			model.addAttribute("email", email);
 			model.addAttribute("name", name);
 			return "addhotel";
@@ -155,7 +155,7 @@ public class HotelAdmin {
 		String name =  (String) session.getAttribute("name");
 		
 		if (email!=null) {
-			model.addAttribute("hotels", hotelRepository.findAll());
+			model.addAttribute("hotels", hotelRepository.findByEmail(email));
 			model.addAttribute("email", email);
 			model.addAttribute("name", name);
 			return "addroom";
@@ -373,6 +373,24 @@ public class HotelAdmin {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:signin.html";
+	}
+	
+	@GetMapping("/room/active/{active}/{id}/")
+	public String active(@PathVariable int active, @PathVariable int id) {
+		Optional<Room> option = roomRepository.findById(id);
+		if(!option.isPresent())
+			throw new NotFounWalaException("id- "+id);
+		
+		Room room = option.get();
+		if (active==0) {
+			room.setActive(false);
+		}else {
+			room.setActive(true);
+		}
+		
+		roomRepository.save(room);
+		
+		return "redirect:../../hotelv.html";
 	}
 
 }
